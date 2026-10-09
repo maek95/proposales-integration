@@ -24,9 +24,13 @@ product where Proposales is one integration. Worth deciding before the GitHub li
 
 ## Settled
 
+- **Which look for the club's site?** Settled 9 October 2026 - B, Fairway modern. See
+  [[012 The site's look is Fairway modern]].
+
 - **Where does our catalogue live?** Settled 6 October 2026 - a typed data file for the first
   version; a database only when a feature needs runtime writes. See
-  [[010 First version - what we build]].
+  [[010 First version - what we build]]. *Changed 9 October 2026:* it comes from a mocked golf
+  booking system, no database - see [[011 The catalogue comes from a mocked golf booking system]].
 
 - **Is Proposales' role in the app big enough?** Settled 6 October 2026 - a simple item list on
   our side, and Proposales does the proposal: the club's adjustments, extras, offer page,

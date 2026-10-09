@@ -42,3 +42,5 @@ link the decision that replaced it.
 - [[008 A golf club's website, with group booking through Proposales]] - the app is the club's site; "Company & group days" creates a ready draft proposal.
 - [[009 A simple item list, Proposales does the proposal]] - green fees, carts, lunch with quantities; everything after sending is Proposales'.
 - [[010 First version - what we build]] - **the one to build from**: scope, flow, what it's built on, what's out.
+- [[011 The catalogue comes from a mocked golf booking system]] - no database; products and prices from a mock-only golf system client.
+- [[012 The site's look is Fairway modern]] - bold grotesk, rounded cards, a dark summary panel with the total and Send; spec in [[Fairway modern]].

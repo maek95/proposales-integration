@@ -1,6 +1,12 @@
 # 010 First version - what we build
 
-Decided 6 October 2026. The scope for the first version, pulling together
+Decided 6 October 2026.
+
+> **Updated 9 October 2026:** the catalogue comes from a mocked golf booking system, not a data
+> file in our code - see [[011 The catalogue comes from a mocked golf booking system]]. And the
+> build starts with a design mockup, before any backend - see [[First version build]].
+
+The scope for the first version, pulling together
 [[005 A standalone app with Proposales as the engine]] to
 [[009 A simple item list, Proposales does the proposal]] and the corrections made along the way.
 What the app is, in more detail, is in [[The app]]; how to build it is [[First version build]].

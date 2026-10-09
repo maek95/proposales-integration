@@ -1,17 +1,16 @@
-import { Footer } from "./_components/layout/footer";
-import { Header } from "./_components/layout/header";
-import { Companies } from "./_components/sections/companies";
-import { Hero } from "./_components/sections/hero";
+import { Clubhouse } from "./_components/sections/club/clubhouse";
+import { Course } from "./_components/sections/club/course";
+import { GroupDaysTeaser } from "./_components/sections/club/group-days-teaser";
+import { Intro } from "./_components/sections/club/intro";
 
-export default function Home() {
+// The club's home page: the course and the clubhouse. Group days have their own page.
+export default function ClubPage() {
   return (
     <>
-      <Header />
-      <main className="flex-1">
-        <Hero />
-        <Companies />
-      </main>
-      <Footer />
+      <Intro />
+      <Course />
+      <Clubhouse />
+      <GroupDaysTeaser />
     </>
   );
 }

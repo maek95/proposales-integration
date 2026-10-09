@@ -16,19 +16,22 @@ not just coded.
 ## Where we are
 
 Work agreed but not finished is in `vault/Plans/`, each plan with its status and steps. Start a
-session there - currently `vault/Plans/First version build.md`, which builds
-`vault/Decisions/010 First version - what we build.md`.
+session there - currently `vault/Plans/First version build.md`, a ticket board (Doing / Next /
+Backlog / Done) that builds `vault/Decisions/010 First version - what we build.md`. Pick up from
+*Doing*, then *Next*.
 
 ## Layout
 
-- `app/page.tsx` - composes the page: header, the sections in order, footer.
-- `app/_components/` - `layout/` (page chrome), `sections/` (one file per page section),
+- `app/page.tsx` - the club's page; `app/group-days/page.tsx` - the group-days form. Each
+  composes its sections; `app/layout.tsx` adds the header and footer.
+- `app/_components/` - `layout/` (page chrome), `sections/<page>/` (one file per section),
   `ui/` (building blocks reused across sections).
 - `app/_lib/external/` - the shared layer every external API builds on: `ExternalApiError`,
   `requestJson` (timeout, validation, logging), the mock switch, `attempt` and `errorResponse`.
 - `app/_lib/<service>/` - one folder per external API we call: `client.ts` (base URL, auth,
   mocks), one `<resource>.ts` per API resource (schemas, types, helpers), `index.ts`
-  re-exporting the resources, `mocks/` (fixtures). Currently `proposales/`.
+  re-exporting the resources, `mocks/` (fixtures). Currently `proposales/` and
+  `golf-booking/` (the club's booking system - mocked, its fixtures are the data).
 - `app/api/<service>/` - our own Route Handlers - URLs the browser calls - exposing the helpers
   to client components.
 - `app/globals.css` - Tailwind `@theme` tokens.
@@ -41,6 +44,7 @@ session there - currently `vault/Plans/First version build.md`, which builds
 
 ```
 npm run dev      # local dev server (PROPOSALES_MOCK=true npm run dev for fixtures, no key)
+                 # GOLF_BOOKING_MOCK=error to see the "prices aren't available" state
 npm run lint
 npm run build    # must pass without .env - Proposales calls only happen at request time
 ```

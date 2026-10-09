@@ -20,6 +20,13 @@ private-events page.
 - **Terms** - often a minimum of about 12 golfers, and a deposit to secure the date.
 - **How it's booked today** - an enquiry form or a phone call, then a quote by hand.
 
+## Clubs don't build booking themselves
+
+Checked 9 October 2026. Swedish clubs book tee times through an external system - **Min Golf**,
+the Swedish Golf Federation's, or **Sweetspot**, which also does dynamic green-fee pricing and
+whose tee times are now bookable through Min Golf. The club's website links to or integrates
+with it. Our site mocks such a system ([[011 The catalogue comes from a mocked golf booking system]]).
+
 ## What it means for us
 
 That process - request, quote, deposit, confirmed date - is Proposales' shape. The feature should
@@ -28,5 +35,6 @@ the whole venue" overstated it. See [[The app]].
 
 ## Sources
 
+- [Min Golf Bokning (golf.se)](https://golf.se/spela-golf/min-golf-bokningsapp) · [SGF and Sweetspot cooperation (klubb.golf.se)](https://klubb.golf.se/administration/git-och-it/sgf-och-sweetspot-i-nytt-samarbete) · [GolfStar - why we switched to Sweetspot](https://golfstar.se/artiklar/varfor-har-vi-bytt-bokningssystem-till-sweetspot/)
 - [Mackmyra Golf - för företag](https://mackmyragolf.se/for-foretag/) · [Sparren GK - företagsgolf](https://sparrengolf.se/foretagsgolf/) · [Arlandastad Golf - företagspaket](https://arlandastadgolf.se/foretagsgolf/foretagspaket/) · [Dagsholm Golf - företagsgolf](https://www.dagsholmgolf.se/grupper/foretagsgolf/) · [Hotell Veckefjärden - golfpaket för företag](https://hotellveckefjarden.com/hur-bokar-man-golfpaket-for-foretag-eller-kundevent/)
 - [Moor Park GC - golf days](https://www.moorparkgc.co.uk/golf/visitors/golf-days) · [Stanmore GC - societies](https://www.stanmoregolfclub.co.uk/visitors/societies-golf-days/) · [Manchester GC - society and company days](https://www.mangc.co.uk/golf-society-days/)

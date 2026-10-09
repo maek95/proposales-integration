@@ -7,8 +7,10 @@ description: Where code goes in app/, Server vs Client Components, styling, Type
 - **Next.js 16.** APIs differ from older versions - check `node_modules/next/dist/docs/` before
   using a Next API you're unsure of (see `AGENTS.md`).
 - **Where code goes:**
-  - A new page section is a file in `app/_components/sections/`, added to `app/page.tsx`.
-  - Page chrome (header, footer) lives in `app/_components/layout/`.
+  - A page section is a file in `app/_components/sections/<page>/` (`club/`, `group-days/`),
+    composed by that page's `page.tsx`.
+  - Page chrome (header, footer) lives in `app/_components/layout/` and is rendered once, in
+    `app/layout.tsx`.
   - Anything reused across sections goes in `app/_components/ui/`. Use those rather than
     re-styling.
   - Non-UI code (API clients, helpers) lives in `app/_lib/`.
@@ -20,6 +22,8 @@ description: Where code goes in app/, Server vs Client Components, styling, Type
   `app/(group)/`.
 - **Server vs client.** Keep components as Server Components. Add `"use client"` only for small
   interactive pieces, passing them data as props.
+- **Links are `next/link`, never a raw `<a>`** - also for external URLs, `#` anchors and links
+  styled as buttons (`pill()`).
 - **Styling.** Tailwind utilities. Shared colours and fonts are tokens in `app/globals.css` -
   add one there rather than hard-coding hex values.
 - **TypeScript.** No `any`.

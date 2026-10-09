@@ -27,7 +27,10 @@ Proposales is good at. The site stays plain; the effort goes into:
 
 ## The site
 
-The club's own website, kept plain - a page about the club and the group-days form is enough. The club's name is still open (see [[Demo venue setup]]).
+The club's own website, kept plain - a page about the club and the group-days form is enough.
+*Changed 9 October 2026:* they're two pages - the club at `/`, group days at `/group-days` - so the
+site reads as a club with a group-days feature, not as a form. The club is **Tallmora GK**,
+fictional (see [[Demo venue setup]]).
 
 ## The feature: Company & group days
 
@@ -36,7 +39,8 @@ is one option among the packages, not the headline. Why a club wants this, and h
 are sold today: [[Golf clubs' group business]].
 
 1. **Put it together** - the visitor fills in quantities of the basic items (green fees, carts,
-   lunch) and a date. Prices come from our data.
+   lunch) and a date. Products and prices come from the club's golf booking system - mocked
+   ([[011 The catalogue comes from a mocked golf booking system]]).
 2. **Send it** - the site creates a draft proposal in the club's Proposales account, every pick a
    block with its price.
 3. **The club reviews** - in Proposales: availability, price, any discount - then sends it. The
@@ -64,9 +68,9 @@ headcount. The user chose the simpler list instead.
 ## Out of scope
 
 - Individual tee-time booking - that's the club's ordinary booking system.
-- Managing the catalogue in Proposales - it lives in our data.
+- Managing the catalogue in Proposales - it comes from the club's golf booking system.
 
 ## Still open
 
 - Whether an LLM has a place.
-- The site's pages and the club's identity.
+- The club's photos - placeholders for now.
