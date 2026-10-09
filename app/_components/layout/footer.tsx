@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { club } from "@/app/_lib/club";
 import { Container } from "../ui/container";
 
@@ -11,9 +12,9 @@ export function Footer() {
         </span>
         <span className="basis-full text-xs">
           A fictional club. This site is a demo of the{" "}
-          <a href="https://proposales.com" className="underline hover:text-ink">
+          <Link href="https://proposales.com" className="underline hover:text-ink">
             Proposales
-          </a>{" "}
+          </Link>{" "}
           API.
         </span>
       </Container>

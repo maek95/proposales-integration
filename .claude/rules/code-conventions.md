@@ -22,6 +22,8 @@ description: Where code goes in app/, Server vs Client Components, styling, Type
   `app/(group)/`.
 - **Server vs client.** Keep components as Server Components. Add `"use client"` only for small
   interactive pieces, passing them data as props.
+- **Links are `next/link`, never a raw `<a>`** - also for external URLs, `#` anchors and links
+  styled as buttons (`pill()`).
 - **Styling.** Tailwind utilities. Shared colours and fonts are tokens in `app/globals.css` -
   add one there rather than hard-coding hex values.
 - **TypeScript.** No `any`.

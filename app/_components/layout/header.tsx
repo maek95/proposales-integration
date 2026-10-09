@@ -17,12 +17,12 @@ export function Header() {
         <nav aria-label="Main" className="flex flex-wrap items-center gap-x-2 gap-y-1 text-[15px] font-medium">
           <NavLink href="/">The club</NavLink>
           <NavLink href="/group-days">Group days</NavLink>
-          <a href="#contact" className="px-3 py-2.75 hover:text-fairway">
+          <Link href="#contact" className="px-3 py-2.75 hover:text-fairway">
             Contact
-          </a>
-          <a href={club.teeTimeUrl} className={pill("dark", "text-[15px] font-medium")}>
+          </Link>
+          <Link href={club.teeTimeUrl} className={pill("dark", "text-[15px] font-medium")}>
             Book a tee time
-          </a>
+          </Link>
         </nav>
       </Container>
     </header>

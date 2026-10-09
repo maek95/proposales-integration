@@ -15,9 +15,9 @@ export function Intro() {
             {club.intro} Visitors are welcome all season, April to October.
           </p>
           <div className="flex flex-wrap items-center gap-3">
-            <a href={club.teeTimeUrl} className={pill("primary")}>
+            <Link href={club.teeTimeUrl} className={pill("primary")}>
               Book a tee time
-            </a>
+            </Link>
             <Link href="/group-days" className="px-3 py-3 font-semibold text-fairway hover:underline">
               Coming as a group?
             </Link>
