@@ -1,6 +1,6 @@
 import type { Product } from "../products";
 
-// The club's group-day products (vault/Plans/First version build.md, BE-1).
+// The club's group-day products (ticket BE-1 in vault/Plans/Tickets/).
 export const products: Product[] = [
   {
     id: "green-fee-18",

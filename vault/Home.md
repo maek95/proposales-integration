@@ -43,6 +43,7 @@ link to them, don't copy them; they change. Nothing in this vault should restate
 - [[Open questions]] - discussed but not settled, with the options and any recommendation.
 - `Plans/` - work agreed but not started, step by step:
   - [[First version build]] - the first version as a ticket board: design first, then backend.
+    Each ticket is a note in `Plans/Tickets/`, in a folder per status (`Todo/`, `In progress/`, `Done/`).
   - [[Demo venue setup]] - what the user sets up by hand in the Proposales app before the first real draft.
 
 ## Still to write

@@ -1,15 +1,14 @@
 # Fairway modern
 
 The look of the club's site, chosen 9 October 2026 - see [[012 The site's look is Fairway modern]].
-This note is the build spec for FE-1 and FE-2 in [[First version build]]: what the mockup shows,
+This note is the build spec for [[DES-2 The site, built from the mockup|DES-2]] in [[First version build]]: what the mockup shows,
 in terms of this repo. The mockup itself is the
 [Claude Design canvas](https://claude.ai/artifact/KoaxopcEbmGGJmfFZYdJQ8) (row B); its source is
 saved next to this note as `fairway-modern.dc.html` - a design file, not code to copy. Read it
 for exact spacing; build with Tailwind and the components below.
 
 **The mockup decides the look, not the data.** Prices, units and default quantities in it are
-sample values. Products and prices come from the golf booking system (BE-1); what each element
-shows and sends is DES-3's interaction map.
+sample values. Products and prices come from the golf booking system ([[BE-1 The mocked golf booking system|BE-1]]).
 
 ## Tokens
 
@@ -70,7 +69,7 @@ club page's striped placeholders became Unsplash photos too (the lake green, the
 through a `Photo` component; every stock photo and its source is listed in
 `app/_lib/photos.ts`.
 
-As mocked up: one page (`app/page.tsx`), anchors for navigation. The companies demo section goes (FE-1).
+As mocked up: one page (`app/page.tsx`), anchors for navigation. The companies demo section goes.
 
 1. **Header** (`layout/header.tsx`) - wordmark with a small stroke flag icon in `fairway`, then
    nav: The club, **Group days** (current, `fairway`, bold), Contact, and a dark pill
@@ -106,12 +105,12 @@ conversion to öre happens only at the Proposales edge.
 
 ## States
 
-The same area of the page swaps between them. Copy as in the mockup; tune it in FE-2.
+The same area of the page swaps between them. Copy as in the mockup; tune it in [[DES-2 The site, built from the mockup|DES-2]].
 
 | State | What shows |
 |---|---|
 | Form | as above |
-| Field wrong | the field gets a 2px `field-error` border, `aria-invalid`, and a message under it ("Enter an email address, like name@company.se"). From the server's field errors (BE-3). |
+| Field wrong | the field gets a 2px `field-error` border, `aria-invalid`, and a message under it ("Enter an email address, like name@company.se"). From the server's field errors ([[BE-3 The submit action|BE-3]]). |
 | Golf system down (prices can't load) | the item cards are replaced by a `danger` notice "Prices aren't available right now..." and **Send is disabled** - the feature can't work without prices (`.claude/rules/external-apis.md`, critical vs nice-to-have). The rest of the page renders. |
 | Proposales down | a `danger` notice above the form, "Requests can't be sent right now...", the visitor's input kept, and Send disabled until they try again. |
 | Sending | the whole form area becomes a `panel` box: a ring spinner, "Sending your request…", "Just a few seconds. Please keep this page open." Send can't be pressed twice. |
@@ -125,7 +124,7 @@ The same area of the page swaps between them. Copy as in the mockup; tune it in 
   restyled as the `danger` notice.
 - `sections/group-days.tsx` is a Server Component: it loads the products through the golf
   system client inside `attempt()` and passes them as props to a small `"use client"` form
-  (quantities, total, the states). The send goes through BE-3's Server Action - one call per
+  (quantities, total, the states). The send goes through [[BE-3 The submit action|BE-3]]'s Server Action - one call per
   submit, nothing while typing.
 
 ## Left open by the mockup
@@ -136,7 +135,7 @@ The same area of the page swaps between them. Copy as in the mockup; tune it in 
 
 ## Settled while building
 
-Decided 9 October 2026, while building FE-1 and FE-2. DES-3 can revise them.
+Decided 9 October 2026, while building [[DES-2 The site, built from the mockup|DES-2]].
 
 - **Quantities start at 0**, and Send is disabled until something is picked. The panel says
   "Nothing picked yet." The mockup's 16 / 4 / 16 were there to show a full card.

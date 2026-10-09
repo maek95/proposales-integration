@@ -4,7 +4,7 @@ Decided 9 October 2026.
 
 ## Context
 
-DES-1 in [[First version build]] asked for a mockup before any code. Three directions were
+[[DES-1 Mockup in Claude Design|DES-1]] in [[First version build]] asked for a mockup before any code. Three directions were
 mocked up in Claude Design ([canvas](https://claude.ai/artifact/KoaxopcEbmGGJmfFZYdJQ8)), each
 with the club page, the group-days form and every state, on desktop and at phone width. Raised in
 [[Open questions]] as *Which look for the club's site?*
@@ -28,6 +28,6 @@ stays cheap to build - the site is the setting, not the product ([[The app]]).
 ## Consequences
 
 - The build spec is [[Fairway modern]]: tokens, the page section by section, the states, and
-  where each piece goes in the code. FE-1 and FE-2 build from it.
-- The mockup's prices and default quantities are samples - the data comes from DES-3 and BE-1.
+  where each piece goes in the code. [[DES-2 The site, built from the mockup|DES-2]] builds from it.
+- The mockup's prices and default quantities are samples - the data comes from [[BE-1 The mocked golf booking system|BE-1]].
 - A and C stay on the canvas for reference; not built.

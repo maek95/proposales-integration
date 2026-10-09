@@ -16,9 +16,10 @@ not just coded.
 ## Where we are
 
 Work agreed but not finished is in `vault/Plans/`, each plan with its status and steps. Start a
-session there - currently `vault/Plans/First version build.md`, a ticket board (Doing / Next /
-Backlog / Done) that builds `vault/Decisions/010 First version - what we build.md`. Pick up from
-*Doing*, then *Next*.
+session there - currently `vault/Plans/First version build.md`, a ticket board (In progress /
+Todo / Done) that builds `vault/Decisions/010 First version - what we build.md`. Each ticket is
+its own note in `vault/Plans/Tickets/<status>/` (`Todo/BE-3 The submit action.md`). Pick up from
+*In progress*, then the top of *Todo*.
 
 ## Layout
 
