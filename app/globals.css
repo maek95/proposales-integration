@@ -1,26 +1,38 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* Fairway modern - see vault/Design/Fairway modern.md. Light only for the first version. */
+@theme {
+  --color-ink: #0e1411;
+  --color-muted: #48524c;
+  --color-subtle: #56605a;
+  --color-on-dark-muted: #a9b8ae;
+  --color-on-dark-rule: #2a332e;
+  --color-fairway: #17663a;
+  --color-mint: #7bd49a;
+  --color-panel: #f1f4f1;
+  --color-stepper: #e3e9e4;
+  --color-line: #cbd3cd;
+  --color-danger-bg: #fdeee7;
+  --color-danger-text: #7a2a0c;
+  --color-danger-icon: #b4400f;
+  --color-field-error: #b3261e;
+  --color-on-fairway-muted: #d3e8da;
+  /* The photo placeholder's stripes, until there's a real photo. */
+  --color-grass: #2f7a4b;
+  --color-grass-light: #378654;
+  --color-on-grass: #e9f3ec;
+
+  --radius-card: 14px;
+  --radius-panel: 20px;
+
+  --container-page: 1200px;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --font-sans: var(--font-hanken-grotesk), system-ui, sans-serif;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--color-white);
+  color: var(--color-ink);
 }

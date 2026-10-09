@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Fairway modern – Company and group days</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>body{margin:0}</style>
+</helmet>
+<div style="font-family: 'Hanken Grotesk', system-ui, sans-serif; color: #0E1411; background: #FFFFFF; font-size: 16px; line-height: 1.5">
+
+<header style="max-width: 1200px; margin: 0 auto; padding: 18px 24px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px 24px">
+  <a href="#club" style="font-weight: 800; font-size: 20px; letter-spacing: -0.02em; color: #0E1411; text-decoration: none; min-height: 44px; display: flex; align-items: center; gap: 10px">
+    <svg width="22" height="28" viewBox="0 0 22 28" fill="none" stroke="#17663A" stroke-width="2" aria-hidden="true"><path d="M4 27V2l14 6-14 6"></path></svg>
+    [Club name] GK
+  </a>
+  <nav aria-label="Main" style="display: flex; flex-wrap: wrap; align-items: center; gap: 4px 8px; font-size: 15px; font-weight: 500">
+    <a href="#club" style="color: #0E1411; text-decoration: none; padding: 11px 12px">The club</a>
+    <a href="#groups" aria-current="page" style="color: #17663A; text-decoration: none; padding: 11px 12px; font-weight: 700">Group days</a>
+    <a href="#contact" style="color: #0E1411; text-decoration: none; padding: 11px 12px">Contact</a>
+    <a href="#teetimes" style="color: #FFFFFF; background: #0E1411; text-decoration: none; padding: 11px 18px; border-radius: 999px">Book a tee time</a>
+  </nav>
+</header>
+
+<section id="club" style="max-width: 1200px; margin: 0 auto; padding: 48px 24px 0">
+  <h1 style="margin: 0 0 24px; font-weight: 800; font-size: clamp(44px, 8vw, 104px); line-height: 0.95; letter-spacing: -0.045em; max-width: 11em">Golf for the whole team.</h1>
+  <div style="display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 20px 40px; margin-bottom: 40px">
+    <p style="margin: 0; font-size: 19px; color: #48524C; max-width: 32em; flex: 1 1 320px">[A sentence or two about the club.] Company days, customer events and golf societies, put together online and confirmed by the club.</p>
+    <a href="#groups" style="display: inline-flex; align-items: center; gap: 10px; min-height: 52px; padding: 0 26px; background: #17663A; color: #FFFFFF; text-decoration: none; font-weight: 600; border-radius: 999px">Plan a group day <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="#FFFFFF" stroke-width="2" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"></path></svg></a>
+  </div>
+  <div role="img" aria-label="Photo placeholder: a group walking down the first fairway in the morning" style="height: 440px; border-radius: 20px; background: repeating-linear-gradient(115deg, #2F7A4B 0 70px, #378654 70px 140px); display: flex; align-items: flex-end; padding: 24px; box-sizing: border-box; color: #E9F3EC; font-size: 14px">Photo · a group on the first fairway, early morning</div>
+</section>
+
+<section id="groups" style="max-width: 1200px; margin: 0 auto; padding: 88px 24px 80px">
+  <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 16px 40px; margin-bottom: 36px">
+    <h2 style="margin: 0; font-weight: 800; font-size: 44px; line-height: 1.05; letter-spacing: -0.03em; flex: 1 1 320px">Put your day together</h2>
+    <p style="margin: 0; color: #48524C; flex: 1 1 320px; max-width: 30em">Pick what the day needs. The club checks availability and emails you an offer, where you can add extras and sign.</p>
+  </div>
+
+  <sc-if value="{{showForm}}" hint-placeholder-val="{{true}}">
+    <form aria-label="Group day request" style="margin: 0; display: flex; flex-wrap: wrap; gap: 28px; align-items: flex-start">
+      <div style="flex: 999 1 520px; min-width: 0; display: flex; flex-direction: column; gap: 28px">
+        <sc-if value="{{isDown}}" hint-placeholder-val="{{false}}">
+          <div role="alert" style="display: flex; gap: 14px; padding: 18px 20px; border-radius: 14px; background: #FDEEE7; color: #7A2A0C">
+            <svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="#B4400F" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="9"></circle><path d="M11 6v6M11 15.5v.5"></path></svg>
+            <div><strong>Requests can't be sent right now.</strong> Our offer system isn't responding. Try again in a little while, or call us on [phone number].</div>
+          </div>
+        </sc-if>
+
+        <fieldset style="border: 0; margin: 0; padding: 0">
+          <legend style="padding: 0; margin-bottom: 14px; font-weight: 700; font-size: 18px">1 · What the day needs</legend>
+          <sc-if value="{{showItems}}" hint-placeholder-val="{{true}}">
+            <div style="display: flex; flex-direction: column; gap: 10px">
+              <sc-for list="{{items}}" as="item" hint-placeholder-count="3">
+                <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 12px 20px; padding: 16px 18px; border-radius: 14px; background: #F1F4F1">
+                  <div style="flex: 1 1 200px; min-width: 0">
+                    <div style="font-weight: 700; font-size: 17px">{{item.name}}</div>
+                    <div style="font-size: 14px; color: #56605A">{{item.price}} {{item.unit}}</div>
+                  </div>
+                  <div style="display: flex; align-items: center; gap: 6px; background: #FFFFFF; border-radius: 999px; padding: 4px">
+                    <button type="button" aria-label="{{item.decLabel}}" onClick="{{item.dec}}" style="width: 44px; height: 44px; border: 0; border-radius: 50%; background: #E3E9E4; font-size: 20px; color: #0E1411; cursor: pointer">−</button>
+                    <output style="min-width: 36px; text-align: center; font-weight: 700; font-size: 18px; font-variant-numeric: tabular-nums">{{item.qty}}</output>
+                    <button type="button" aria-label="{{item.incLabel}}" onClick="{{item.inc}}" style="width: 44px; height: 44px; border: 0; border-radius: 50%; background: #17663A; font-size: 20px; color: #FFFFFF; cursor: pointer">+</button>
+                  </div>
+                </div>
+              </sc-for>
+            </div>
+          </sc-if>
+          <sc-if value="{{noPrices}}" hint-placeholder-val="{{false}}">
+            <div role="alert" style="display: flex; gap: 14px; padding: 18px 20px; border-radius: 14px; background: #FDEEE7; color: #7A2A0C">
+              <svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="#B4400F" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="9"></circle><path d="M11 6v6M11 15.5v.5"></path></svg>
+              <div><strong>Prices aren't available right now.</strong> Our booking system isn't responding, so group requests are paused. Please try again later.</div>
+            </div>
+          </sc-if>
+        </fieldset>
+
+        <fieldset style="border: 0; margin: 0; padding: 0">
+          <legend style="padding: 0; margin-bottom: 14px; font-weight: 700; font-size: 18px">2 · When and who</legend>
+          <div style="display: flex; flex-wrap: wrap; gap: 16px">
+            <label style="flex: 1 1 220px; display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 600">Preferred date
+              <input type="date" style="height: 48px; padding: 0 14px; border: 1.5px solid #CBD3CD; border-radius: 12px; background: #FFFFFF; font: inherit; font-weight: 400; color: inherit">
+            </label>
+            <label style="flex: 1 1 220px; display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 600">Company
+              <input type="text" autocomplete="organization" placeholder="Company or group name" style="height: 48px; padding: 0 14px; border: 1.5px solid #CBD3CD; border-radius: 12px; background: #FFFFFF; font: inherit; font-weight: 400; color: inherit">
+            </label>
+            <label style="flex: 1 1 220px; display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 600">Your name
+              <input type="text" autocomplete="name" style="height: 48px; padding: 0 14px; border: 1.5px solid #CBD3CD; border-radius: 12px; background: #FFFFFF; font: inherit; font-weight: 400; color: inherit">
+            </label>
+            <label style="flex: 1 1 220px; display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 600">Email
+              <input type="email" autocomplete="email" aria-invalid="{{isInvalid}}" aria-describedby="email-error-b" style="height: 48px; padding: 0 14px; border: {{emailBorder}}; border-radius: 12px; background: #FFFFFF; font: inherit; font-weight: 400; color: inherit">
+              <sc-if value="{{isInvalid}}" hint-placeholder-val="{{false}}">
+                <span id="email-error-b" style="color: #B3261E; font-weight: 600">Enter an email address, like name@company.se</span>
+              </sc-if>
+            </label>
+          </div>
+        </fieldset>
+      </div>
+
+      <aside aria-label="Your day" style="flex: 1 1 300px; min-width: 0; padding: 28px; border-radius: 20px; background: #0E1411; color: #FFFFFF">
+        <div style="font-weight: 600; font-size: 14px; color: #A9B8AE; margin-bottom: 16px">Your day</div>
+        <sc-for list="{{items}}" as="item" hint-placeholder-count="3">
+          <div style="display: flex; justify-content: space-between; gap: 12px; padding: 8px 0; border-bottom: 1px solid #2A332E; font-size: 15px">
+            <span>{{item.qty}} × {{item.name}}</span>
+            <span style="font-variant-numeric: tabular-nums; white-space: nowrap">{{item.line}}</span>
+          </div>
+        </sc-for>
+        <div style="margin-top: 22px; font-size: 14px; color: #A9B8AE">Indicative total</div>
+        <div style="font-weight: 800; font-size: 40px; letter-spacing: -0.03em; font-variant-numeric: tabular-nums">{{total}}</div>
+        <p style="margin: 6px 0 24px; font-size: 13px; color: #A9B8AE">Incl. VAT. Final price and availability are confirmed in the club's offer.</p>
+        <button type="button" onClick="{{send}}" disabled="{{disabled}}" style="width: 100%; min-height: 54px; border: 0; border-radius: 999px; background: {{btnBg}}; color: #0E1411; font: inherit; font-weight: 700; font-size: 17px; cursor: pointer">Send request</button>
+      </aside>
+    </form>
+  </sc-if>
+
+  <sc-if value="{{isSending}}" hint-placeholder-val="{{false}}">
+    <div role="status" style="padding: 80px 32px; border-radius: 20px; background: #F1F4F1; text-align: center">
+      <svg width="48" height="48" viewBox="0 0 48 48" fill="none" aria-hidden="true"><circle cx="24" cy="24" r="20" stroke="#CBD3CD" stroke-width="4"></circle><path d="M24 4a20 20 0 0 1 20 20" stroke="#17663A" stroke-width="4" stroke-linecap="round"></path></svg>
+      <h3 style="margin: 20px 0 8px; font-weight: 800; font-size: 30px; letter-spacing: -0.02em">Sending your request…</h3>
+      <p style="margin: 0; color: #48524C">Just a few seconds. Please keep this page open.</p>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{isSent}}" hint-placeholder-val="{{false}}">
+    <div role="status" style="padding: 56px 40px; border-radius: 20px; background: #17663A; color: #FFFFFF; display: flex; flex-wrap: wrap; gap: 24px 48px; align-items: flex-start">
+      <svg width="56" height="56" viewBox="0 0 56 56" fill="none" aria-hidden="true"><circle cx="28" cy="28" r="28" fill="#FFFFFF"></circle><path d="M17 29l7 7 15-16" stroke="#17663A" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+      <div style="flex: 1 1 400px; min-width: 0">
+        <h3 style="margin: 0 0 12px; font-weight: 800; font-size: 36px; line-height: 1.1; letter-spacing: -0.03em">Request sent.</h3>
+        <p style="margin: 0 0 18px; font-size: 19px">The club will email you an offer shortly. You can add extras, adjust numbers and sign right in the offer.</p>
+        <p style="margin: 0 0 28px; font-size: 14px; color: #D3E8DA">{{summary}}</p>
+        <button type="button" onClick="{{reset}}" style="min-height: 48px; padding: 0 22px; border: 1.5px solid #FFFFFF; border-radius: 999px; background: transparent; color: #FFFFFF; font: inherit; font-weight: 600; cursor: pointer">Start a new request</button>
+      </div>
+    </div>
+  </sc-if>
+</section>
+
+<footer id="contact" style="background: #F1F4F1">
+  <div style="max-width: 1200px; margin: 0 auto; padding: 40px 24px; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px 24px; font-size: 14px; color: #48524C">
+    <span style="font-weight: 800; color: #0E1411">[Club name] GK</span>
+    <span>[Address] · [Phone number] · [Email]</span>
+  </div>
+</footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"screen":{"editor":"enum","options":["form","invalid","noprices","unavailable","sending","sent"],"default":"form","section":"State"},"$preview":{"width":1280,"height":1900}}'>
+class Component extends DCLogic {
+  state = { qty: { green: 16, cart: 4, lunch: 16 }, screen: null };
+  componentDidUpdate(prev) {
+    if (prev.screen !== this.props.screen && this.state.screen) this.setState({ screen: null });
+  }
+  componentWillUnmount() { clearTimeout(this.timer); }
+  renderVals() {
+    const prices = { green: 650, cart: 400, lunch: 165 };
+    const q = this.state.qty;
+    const kr = (n) => n.toLocaleString('sv-SE') + ' kr';
+    const step = (key, d) => () => {
+      const next = Object.assign({}, this.state.qty);
+      next[key] = Math.max(0, Math.min(144, next[key] + d));
+      this.setState({ qty: next });
+    };
+    const defs = [
+      { key: 'green', name: 'Green fee, 18 holes', unit: 'per player', noun: 'green fees' },
+      { key: 'cart', name: 'Golf cart', unit: 'per cart, all day', noun: 'carts' },
+      { key: 'lunch', name: 'Clubhouse lunch', unit: 'per person', noun: 'lunches' }
+    ];
+    const items = defs.map((d) => ({
+      name: d.name, unit: d.unit, price: kr(prices[d.key]), qty: q[d.key],
+      line: kr(q[d.key] * prices[d.key]),
+      dec: step(d.key, -1), inc: step(d.key, 1),
+      decLabel: 'Fewer ' + d.noun, incLabel: 'More ' + d.noun
+    }));
+    const total = defs.reduce((s, d) => s + q[d.key] * prices[d.key], 0);
+    const screen = this.state.screen || this.props.screen || 'form';
+    const down = screen === 'unavailable';
+    const noPrices = screen === 'noprices';
+    const invalid = screen === 'invalid';
+    return {
+      items, total: kr(total),
+      summary: q.green + ' green fees · ' + q.cart + ' carts · ' + q.lunch + ' lunches · ' + kr(total) + ' indicative',
+      showForm: ['form', 'invalid', 'unavailable', 'noprices'].indexOf(screen) >= 0,
+      showItems: !noPrices, noPrices: noPrices, isDown: down, isInvalid: invalid,
+      isSending: screen === 'sending', isSent: screen === 'sent',
+      disabled: down || noPrices,
+      emailBorder: invalid ? '2px solid #B3261E' : '1.5px solid #CBD3CD',
+      btnBg: (down || noPrices) ? '#56605A' : '#7BD49A',
+      send: () => {
+        this.setState({ screen: 'sending' });
+        clearTimeout(this.timer);
+        this.timer = setTimeout(() => this.setState({ screen: 'sent' }), 1800);
+      },
+      reset: () => this.setState({ screen: 'form' })
+    };
+  }
+}
+</script>
+</body>
+</html>

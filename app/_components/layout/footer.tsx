@@ -1,18 +1,21 @@
+import { club } from "@/app/_lib/club";
 import { Container } from "../ui/container";
 
 export function Footer() {
   return (
-    <footer className="border-t border-foreground/10">
-      <Container className="py-8 text-sm text-foreground/60">
-        Built on the{" "}
-        <a
-          href="https://docs.proposales.com"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="underline hover:text-foreground"
-        >
-          Proposales API
-        </a>
+    <footer id="contact" className="bg-panel">
+      <Container className="flex flex-wrap justify-between gap-x-6 gap-y-4 py-10 text-sm text-muted">
+        <span className="font-extrabold text-ink">{club.name}</span>
+        <span>
+          {club.address} · {club.phone} · {club.email}
+        </span>
+        <span className="basis-full text-xs">
+          A fictional club. This site is a demo of the{" "}
+          <a href="https://proposales.com" className="underline hover:text-ink">
+            Proposales
+          </a>{" "}
+          API.
+        </span>
       </Container>
     </footer>
   );

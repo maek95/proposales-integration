@@ -22,6 +22,10 @@ link to them, don't copy them; they change. Nothing in this vault should restate
 
 - [[Golf clubs' group business]] - how clubs sell company and group days today, and why our feature fits.
 
+## The design
+
+- [[Fairway modern]] - the site's look and the build spec for the pages and the form.
+
 ## Integrations
 
 - **Proposales** - the integration the case is about.
@@ -38,8 +42,8 @@ link to them, don't copy them; they change. Nothing in this vault should restate
 - [[Decisions]] - one note per decision, the template, and the log.
 - [[Open questions]] - discussed but not settled, with the options and any recommendation.
 - `Plans/` - work agreed but not started, step by step:
-  - [[First version build]] - the build order for the first version, against mocks first.
-  - [[Demo venue setup]] - the golf club's catalogue in our repo, and just enough Proposales setup.
+  - [[First version build]] - the first version as a ticket board: design first, then backend.
+  - [[Demo venue setup]] - what the user sets up by hand in the Proposales app before the first real draft.
 
 ## Still to write
 
