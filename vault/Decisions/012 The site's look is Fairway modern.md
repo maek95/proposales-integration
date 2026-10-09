@@ -29,5 +29,5 @@ stays cheap to build - the site is the setting, not the product ([[The app]]).
 
 - The build spec is [[Fairway modern]]: tokens, the page section by section, the states, and
   where each piece goes in the code. FE-1 and FE-2 build from it.
-- The mockup's prices and default quantities are samples - the data comes from DES-2 and BE-1.
+- The mockup's prices and default quantities are samples - the data comes from DES-3 and BE-1.
 - A and C stay on the canvas for reference; not built.

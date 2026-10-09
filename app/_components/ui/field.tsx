@@ -1,7 +1,7 @@
 import type { ComponentProps } from "react";
 
 /** A labelled input with its error message underneath. `name` also names the error's id. */
-export function Field({
+export default function Field({
   label,
   error,
   name,

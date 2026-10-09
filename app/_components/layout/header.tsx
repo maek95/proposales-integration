@@ -1,10 +1,10 @@
 import Link from "next/link";
 import { club } from "@/app/_lib/club";
-import { pill } from "../ui/button";
-import { Container } from "../ui/container";
-import { NavLink } from "./nav-link";
+import pill from "../ui/pill";
+import Container from "../ui/container";
+import NavLink from "./nav-link";
 
-export function Header() {
+export default function Header() {
   return (
     <header>
       <Container className="flex flex-wrap items-center justify-between gap-x-6 gap-y-3 py-4.5">
@@ -15,9 +15,9 @@ export function Header() {
           {club.name}
         </Link>
         <nav aria-label="Main" className="flex flex-wrap items-center gap-x-2 gap-y-1 text-[15px] font-medium">
-          <NavLink href="/">The club</NavLink>
+          <NavLink href="/club">The club</NavLink>
           <NavLink href="/group-days">Group days</NavLink>
-          <Link href="#contact" className="px-3 py-2.75 hover:text-fairway">
+          <Link href="#contact" className="min-h-11 rounded-full px-4 py-2.75 transition-colors hover:bg-panel">
             Contact
           </Link>
           <Link href={club.teeTimeUrl} className={pill("dark", "text-[15px] font-medium")}>

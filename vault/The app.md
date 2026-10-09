@@ -28,8 +28,8 @@ Proposales is good at. The site stays plain; the effort goes into:
 ## The site
 
 The club's own website, kept plain - a page about the club and the group-days form is enough.
-*Changed 9 October 2026:* they're two pages - the club at `/`, group days at `/group-days` - so the
-site reads as a club with a group-days feature, not as a form. The club is **Tallmora GK**,
+*Changed 9 October 2026:* they're separate pages - a landing page at `/` with a way into each, the club at `/club`, group
+days at `/group-days` - so the site reads as a club with a group-days feature, not as a form. The club is **Tallmora GK**,
 fictional (see [[Demo venue setup]]).
 
 ## The feature: Company & group days
@@ -73,4 +73,4 @@ headcount. The user chose the simpler list instead.
 ## Still open
 
 - Whether an LLM has a place.
-- The club's photos - placeholders for now.
+- The club's photos - free Unsplash stock photos for now, listed in `app/_lib/photos.ts`.

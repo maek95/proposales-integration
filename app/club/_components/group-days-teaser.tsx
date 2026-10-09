@@ -1,9 +1,9 @@
 import Link from "next/link";
-import { pill } from "../../ui/button";
-import { Container } from "../../ui/container";
-import { SectionHeading } from "../../ui/heading";
+import pill from "@/app/_components/ui/pill";
+import Container from "@/app/_components/ui/container";
+import SectionHeading from "@/app/_components/ui/headings/section-heading";
 
-export function GroupDaysTeaser() {
+export default function GroupDaysTeaser() {
   return (
     <section>
       <Container className="pt-22 pb-20">

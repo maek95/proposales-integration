@@ -1,8 +1,8 @@
 import Link from "next/link";
 import { club } from "@/app/_lib/club";
-import { Container } from "../ui/container";
+import Container from "../ui/container";
 
-export function Footer() {
+export default function Footer() {
   return (
     <footer id="contact" className="bg-panel">
       <Container className="flex flex-wrap justify-between gap-x-6 gap-y-4 py-10 text-sm text-muted">

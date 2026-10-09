@@ -1,5 +1,5 @@
 /** A pill stepper: − quantity +. Labels name what's counted ("green fees"). */
-export function Stepper({
+export default function Stepper({
   value,
   min = 0,
   max,

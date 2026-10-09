@@ -1,7 +1,7 @@
 import type { ReactNode } from "react";
 
 /** Inline error for a feature whose integration failed - the rest of the page keeps working. */
-export function ErrorNotice({ title, children }: { title: string; children?: ReactNode }) {
+export default function ErrorNotice({ title, children }: { title: string; children?: ReactNode }) {
   return (
     <div role="alert" className="flex gap-3.5 rounded-card bg-danger-bg px-5 py-4.5 text-danger-text">
       <svg
