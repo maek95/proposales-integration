@@ -171,7 +171,9 @@ public site, not the logged-in app. What we build should add to this, not repeat
 - **The API creates proposals, it doesn't send them.** Checked 6 October 2026: a created
   proposal is a draft - recipient, title, description, priced blocks and custom `data` can all
   be set, but sending (and so the e-signature) happens when someone clicks Send in Proposales.
-  An app can follow the status afterwards with get or search.
+  An app can follow the status afterwards with get or search. Creating one returns its `uuid`
+  and a `url` (checked 9 October 2026, from the spec) - which view the `url` opens is still to
+  check on a real draft.
 - **Inbox requests can be marked as tests** (`is_test`), so demo RFPs stay distinguishable.
 - **A request for proposal carries no product lines.** Checked 6 October 2026: an inbox request
   has contact fields, dates and a message, and keeps unknown fields as metadata - but no blocks,
@@ -180,6 +182,10 @@ public site, not the logged-in app. What we build should add to this, not repeat
 - **Content has no price through the API.** Checked 6 October 2026: creating content takes a
   title, a description and images by public URL. Prices are set on each proposal block. Content
   also can't be given our own id on create.
+- **A product block has no VAT rate.** Checked 9 October 2026, from the spec: a block carries a
+  unit price in one of four `unit_value_*` fields (with or without discount, with or without
+  tax), but no rate - only its `package_split` rows have `vat`. How the tax is worked out is
+  still to check on a real draft.
 - **Money is in the smallest currency unit.** Checked 6 October 2026, from the spec's own
   description: 650 kr is sent as `65000`. Sending `650` would make every price 100 times too low.
 - **A proposal can record where it came from** - `tracking.created_from_template` (a template's

@@ -9,7 +9,8 @@ export default function LandingPage() {
   return (
     <section className="relative isolate flex min-h-[calc(100svh-80px)] items-center justify-center overflow-hidden px-6 py-24 text-center text-white">
       <Image
-        {...photos.hero}
+        src={photos.hero.src}
+        alt={photos.hero.alt}
         fill
         sizes="100vw"
         loading="eager"
