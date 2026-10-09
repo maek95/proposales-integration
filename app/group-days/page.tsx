@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
-import { Intro } from "../_components/sections/group-days/intro";
-import { RequestSection } from "../_components/sections/group-days/request-section";
+import Intro from "./_components/intro";
+import RequestSection from "./_components/request-section";
 
 export const metadata: Metadata = {
   title: "Company & group days",

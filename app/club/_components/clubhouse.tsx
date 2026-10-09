@@ -1,12 +1,13 @@
-import { Container } from "../../ui/container";
-import { SectionHeading } from "../../ui/heading";
-import { PhotoPlaceholder } from "../../ui/photo-placeholder";
+import Container from "@/app/_components/ui/container";
+import SectionHeading from "@/app/_components/ui/headings/section-heading";
+import Photo from "@/app/_components/ui/photo";
+import { photos } from "@/app/_lib/photos";
 
-export function Clubhouse() {
+export default function Clubhouse() {
   return (
     <section>
       <Container className="flex flex-wrap items-center gap-x-16 gap-y-8 pt-22">
-        <PhotoPlaceholder label="the clubhouse terrace over the 18th" className="h-80 flex-[1_1_360px]" />
+        <Photo {...photos.clubhouse} sizes="(min-width: 900px) 50vw, 100vw" className="h-80 flex-[1_1_360px]" />
         <div className="flex-[1_1_360px]">
           <SectionHeading className="mb-5">The clubhouse</SectionHeading>
           <div className="max-w-[34em] space-y-4 text-muted">

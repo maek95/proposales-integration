@@ -1,5 +1,5 @@
-import { Container } from "../../ui/container";
-import { SectionHeading } from "../../ui/heading";
+import Container from "@/app/_components/ui/container";
+import SectionHeading from "@/app/_components/ui/headings/section-heading";
 
 const facts = [
   { value: "18", label: "holes" },
@@ -8,7 +8,7 @@ const facts = [
   { value: "Apr–Oct", label: "season" },
 ];
 
-export function Course() {
+export default function Course() {
   return (
     <section>
       <Container className="flex flex-wrap items-start gap-x-16 gap-y-8 pt-22">

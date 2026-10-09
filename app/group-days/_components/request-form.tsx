@@ -6,10 +6,10 @@ import { formatKr } from "@/app/_lib/format";
 import type { Product } from "@/app/_lib/golf-booking";
 import { MAX_QUANTITY, type FieldErrors, type GroupDayRequest } from "@/app/_lib/group-days/request";
 import { sendGroupDayRequest } from "@/app/_lib/group-days/send-request";
-import { Button } from "../../ui/button";
-import { ErrorNotice } from "../../ui/error-notice";
-import { Field } from "../../ui/field";
-import { Stepper } from "../../ui/stepper";
+import Button from "@/app/_components/ui/button";
+import ErrorNotice from "@/app/_components/ui/error-notice";
+import Field from "@/app/_components/ui/field";
+import Stepper from "@/app/_components/ui/stepper";
 
 type Details = Pick<GroupDayRequest, "date" | "company" | "name" | "email">;
 
@@ -26,7 +26,7 @@ function without(errors: FieldErrors, field: keyof FieldErrors): FieldErrors {
  * The group-days form and the states that replace it: sending and sent. Nothing is called while
  * the visitor picks and types - one Server Action call per press of Send.
  */
-export function RequestForm({
+export default function RequestForm({
   products,
   productsError,
 }: {

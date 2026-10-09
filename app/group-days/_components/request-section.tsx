@@ -1,12 +1,12 @@
 import { attempt } from "@/app/_lib/external";
 import { listProducts } from "@/app/_lib/golf-booking";
-import { Container } from "../../ui/container";
-import { SectionHeading } from "../../ui/heading";
-import { RequestForm } from "./request-form";
+import Container from "@/app/_components/ui/container";
+import SectionHeading from "@/app/_components/ui/headings/section-heading";
+import RequestForm from "./request-form";
 
 // Server Component: loads the club's products from the golf booking system and hands them to
 // the interactive form. Without prices the form can't work, so it shows why and disables Send.
-export async function RequestSection() {
+export default async function RequestSection() {
   const products = await attempt(listProducts);
 
   return (

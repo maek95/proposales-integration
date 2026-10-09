@@ -22,9 +22,10 @@ Backlog / Done) that builds `vault/Decisions/010 First version - what we build.m
 
 ## Layout
 
-- `app/page.tsx` - the club's page; `app/group-days/page.tsx` - the group-days form. Each
-  composes its sections; `app/layout.tsx` adds the header and footer.
-- `app/_components/` - `layout/` (page chrome), `sections/<page>/` (one file per section),
+- `app/page.tsx` - the landing page; `app/club/` - the club; `app/group-days/` - the group-days
+  form. Each route keeps its own pieces in a private `_components/`; `app/layout.tsx` adds the
+  header and footer.
+- `app/_components/` - shared only: `layout/` (page chrome),
   `ui/` (building blocks reused across sections).
 - `app/_lib/external/` - the shared layer every external API builds on: `ExternalApiError`,
   `requestJson` (timeout, validation, logging), the mock switch, `attempt` and `errorResponse`.

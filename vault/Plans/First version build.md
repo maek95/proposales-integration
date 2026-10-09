@@ -22,8 +22,8 @@ integrations, **FE** pages and components, **INT** real integration checks, **SH
 
 ### FE-2 The group-days form
 
-*Started 9 October 2026.* The form and every state are built (`sections/group-days.tsx`, the
-client form `sections/group-day-form.tsx`), and the golf-system-down state is checked with
+*Started 9 October 2026.* The form and every state are built (`app/group-days/_components/`: `request-section.tsx` and the
+client form `request-form.tsx`), and the golf-system-down state is checked with
 `GOLF_BOOKING_MOCK=error`. Send goes to a Server Action, `app/_lib/group-days/send-request.ts`,
 that only validates for now - field errors come back, but nothing is sent and "Proposales down"
 can't happen yet. What's left: BE-3 behind that action, then a run through every state in a
@@ -38,7 +38,7 @@ sent and error states. Calls happen only on submit - no API calls while typing.
 
 ## Next
 
-### DES-2 Interaction map
+### DES-3 Interaction map
 
 **What:** from the signed-off mockup, a table of every element the visitor sees or clicks:
 
@@ -84,7 +84,7 @@ DES-1 before building.
 - **`company_id`** - from `listCompanies()`.
 - **Response** - `{ proposal: {...} }`; type only the fields we use (the uuid at least).
 
-**Blocked by:** DES-2.
+**Blocked by:** DES-3.
 **Done when:** the helper works against its fixture, with `PROPOSALES_MOCK=true` and `=error`.
 
 ### BE-3 The submit action
@@ -148,6 +148,24 @@ repo.
 
 ## Done
 
+### DES-2 Folder structure and landing page
+
+Done 9 October 2026, from the user, after FE-1. Not in the mockup.
+
+**What:** the site's pages and the code behind them reorganised:
+
+- **Three pages** - a landing page at `/` (a full-screen course photo, the club's line, and two
+  ways in: *The club & tee times*, *Plan a group day*), the club at `/club`, group days at
+  `/group-days`. The one-page mockup read as if the whole site were the form. Details and the
+  stock photo in *The page, top to bottom* in [[Fairway modern]].
+- **Pages own their pieces** - each route keeps its components in a private `_components/`
+  (`app/club/_components/`); `app/_components/` holds only what's shared (`layout/`, `ui/`). A
+  page isn't a reusable section.
+- **One component per file**, as `export default function`, named after the file; related ones
+  share a folder (`ui/headings/`).
+
+The conventions are in `.claude/rules/code-conventions.md`.
+
 ### FE-1 The club page
 
 Done 9 October 2026. Header, intro, photo placeholder, footer, the Fairway modern tokens and
@@ -164,9 +182,9 @@ hero copy in `[brackets]`, the companies demo section, unused files in `public/`
 
 ### BE-1 The mocked golf booking system
 
-Done 9 October 2026, ahead of DES-2 - the user asked to build the mockup, and the form needs
+Done 9 October 2026, ahead of DES-3 - the user asked to build the mockup, and the form needs
 products to show. `app/_lib/golf-booking/`: `listProducts()`, fixtures as the data, and
-`GOLF_BOOKING_MOCK=error` to simulate it being down. Check it against DES-2's map when that's
+`GOLF_BOOKING_MOCK=error` to simulate it being down. Check it against DES-3's map when that's
 written.
 
 **What:** per [[011 The catalogue comes from a mocked golf booking system]] - a client in
@@ -175,7 +193,7 @@ club's products, fixtures as the only source. A fictional, generic name. The thr
 green fee 18 holes (650 SEK, per player), golf cart (400 SEK, per cart, two players), clubhouse
 lunch (185 SEK, per person), with a short description each. Prices in whole kronor here.
 
-**Blocked by:** DES-2.
+**Blocked by:** DES-3.
 **Done when:** the products load through the client, and its error mode works like Proposales'.
 
 ### DES-1 Mockup in Claude Design

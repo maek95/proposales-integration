@@ -9,7 +9,7 @@ for exact spacing; build with Tailwind and the components below.
 
 **The mockup decides the look, not the data.** Prices, units and default quantities in it are
 sample values. Products and prices come from the golf booking system (BE-1); what each element
-shows and sends is DES-2's interaction map.
+shows and sends is DES-3's interaction map.
 
 ## Tokens
 
@@ -50,20 +50,34 @@ form. Now `/` is the club's own page and `/group-days` is one part of the site, 
 marking the current page. The mockup's single page with anchors is described below as it was;
 what changed:
 
-- **The club** (`/`, `sections/club/`) - "Golf among the pines.", the photo, *The course* (text
+- **The club** (`/club`, `app/club/_components/`) - "Golf among the pines.", the photo, *The course* (text
   and four facts), *The clubhouse*, and a `fairway` panel "Bring the whole team." linking to
   group days. The club's facts and copy are made up.
-- **Group days** (`/group-days`, `sections/group-days/`) - the mockup's "Golf for the whole
+- **Group days** (`/group-days`, `app/group-days/_components/`) - the mockup's "Golf for the whole
   team." intro, then three steps (put it together, the club sends an offer, adjust and sign) -
   what happens after Send, which the one-page version never said - then the form.
 - The header and footer are rendered once, in `app/layout.tsx`. *Contact* jumps to the footer
   on either page.
+
+*Changed again 9 October 2026, from the user:* **three pages.** `/` is a landing page - a
+full-screen photo of a course, the club's line, and two ways in: *The club & tee times* and
+*Plan a group day*. The club moved to `/club` (its heading is now "Welcome to Tallmora GK.", so
+it doesn't repeat the landing page). Each page's pieces live next to the route
+(`app/club/_components/`), not in shared `sections/` - a page isn't a reusable section. The
+photo is a free Unsplash stock photo, loaded through `next/image`
+(`images.unsplash.com` allowed in `next.config.ts`), until the club has its own. *Same day:* the
+club page's striped placeholders became Unsplash photos too (the lake green, the clubhouse),
+through a `Photo` component; every stock photo and its source is listed in
+`app/_lib/photos.ts`.
 
 As mocked up: one page (`app/page.tsx`), anchors for navigation. The companies demo section goes (FE-1).
 
 1. **Header** (`layout/header.tsx`) - wordmark with a small stroke flag icon in `fairway`, then
    nav: The club, **Group days** (current, `fairway`, bold), Contact, and a dark pill
    "Book a tee time" linking out to the club's booking system. Wraps on a phone.
+   *Changed 9 October 2026, from the user:* the current page is a `fairway` pill with white
+   text, not just green bold text - it wasn't obvious enough. The other links get a `panel`
+   background on hover.
 2. **Club intro** (`sections/hero.tsx`) - the big H1 "Golf for the whole team.", a lead line
    with the club's own sentence in `[brackets]` until the club exists, and a `fairway` pill
    "Plan a group day" with an arrow, jumping to the form. Below, a full-width photo, 440px
@@ -122,7 +136,7 @@ The same area of the page swaps between them. Copy as in the mockup; tune it in 
 
 ## Settled while building
 
-Decided 9 October 2026, while building FE-1 and FE-2. DES-2 can revise them.
+Decided 9 October 2026, while building FE-1 and FE-2. DES-3 can revise them.
 
 - **Quantities start at 0**, and Send is disabled until something is picked. The panel says
   "Nothing picked yet." The mockup's 16 / 4 / 16 were there to show a full card.

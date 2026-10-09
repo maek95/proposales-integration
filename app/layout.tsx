@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Hanken_Grotesk } from "next/font/google";
-import { Footer } from "./_components/layout/footer";
-import { Header } from "./_components/layout/header";
+import Footer from "./_components/layout/footer";
+import Header from "./_components/layout/header";
 import { club } from "./_lib/club";
 import "./globals.css";
 
