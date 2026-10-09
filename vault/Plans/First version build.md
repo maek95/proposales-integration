@@ -43,14 +43,13 @@ integrations, **FE** pages and components, **INT** real integration checks, **SH
 
 ## In progress
 
-*(nothing - the site is built; the Proposales side is next)*
+- [[BE-2 createProposal, with its fixture]] - built; tried against mocks once BE-3 calls it.
 
 ## Todo
 
 In order - the top one is next.
 
 - [[ACC-1 Look at the Buyer Portal]] - the user, in the Proposales app.
-- [[BE-2 createProposal, with its fixture]] - how the picks become a Proposales draft.
 - [[BE-3 The submit action]]
 - [[ACC-2 Set up the club in Proposales]]
 - [[INT-1 First real draft]]

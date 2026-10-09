@@ -52,6 +52,11 @@ own rule file (`proposales.md`).
   the schema is also the whitelist of what reaches our code.
 - **Helpers return the domain value**, not the service's wire format: unwrap envelopes like
   `{ data: [...] }` in the helper, so callers get `Company[]`.
+- **Writes take our shape, too.** A helper that sends data takes it in our own terms (whole
+  currency units, our field names) and builds the service's format itself, with a zod schema
+  for the body checked before every call - mocked or not. A service's format lives in its own
+  folder; a second service that wants the same data differently gets its own client, not a
+  change to the caller.
 - **Only pass on what's needed.** A Route Handler returns the fields its client uses, never the
   whole upstream object - upstream objects carry tokens, IDs and personal data the browser
   shouldn't see.
