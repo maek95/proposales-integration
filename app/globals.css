@@ -1,5 +1,9 @@
 @import "tailwindcss";
 
+/* `landing:` - styles for the page chrome on the landing page only, where the photo runs to the
+   bottom of the page and the footer sits on it. The landing hero carries `data-landing`. */
+@custom-variant landing (&:where(body:has([data-landing]) *));
+
 /* Fairway modern - see vault/Design/Fairway modern.md. Light only for the first version. */
 @theme {
   --color-ink: #0e1411;

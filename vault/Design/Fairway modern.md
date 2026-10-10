@@ -68,6 +68,17 @@ photo is a free Unsplash stock photo, loaded through `next/image`
 club page's striped placeholders became Unsplash photos too (the lake green, the clubhouse),
 through a `Photo` component; every stock photo and its source is listed in
 `app/_content/photos.ts`.
+*Changed 10 October 2026, from the user noticing a grey hero on every refresh in production:*
+the photos were loaded from `images.unsplash.com`, so each one was fetched and resized again
+once the optimiser's 4-hour cache ran out, with nothing to show meanwhile - the dark overlay on
+an empty background. They're now in the repo (`app/_content/photos/`, 2400 px, about 2 MB for the
+three) as static imports: hashed and cached as `immutable`, with a blurred placeholder built in.
+`remotePatterns` is gone from `next.config.ts`. Kept in git rather than LFS or a CDN - 2 MB,
+replaced at most once, when the club has its own. See [[FE-4 The photos show straight away, and the landing photo runs behind the footer|FE-4]].
+
+*Changed 10 October 2026, from the user:* on the landing page the photo now runs behind the
+footer to the bottom of the page, and the footer sits on it in white - see
+[[FE-4 The photos show straight away, and the landing photo runs behind the footer|FE-4]].
 
 As mocked up: one page (`app/page.tsx`), anchors for navigation. The companies demo section goes.
 

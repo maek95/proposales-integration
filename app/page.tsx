@@ -4,10 +4,15 @@ import { club } from "./_content/club";
 import { photos } from "./_content/photos";
 import pill from "./_components/ui/pill";
 
-// The landing page: the course, and the two ways in - the club, or a group day.
+// The landing page: the course, and the two ways in - the club, or a group day. The photo fills
+// everything below the header, footer included: it's positioned against the layout's wrapper
+// around the page and the footer, and `data-landing` switches the footer to white on the photo.
 export default function LandingPage() {
   return (
-    <section className="relative isolate flex min-h-[calc(100svh-80px)] items-center justify-center overflow-hidden px-6 py-24 text-center text-white">
+    <section
+      data-landing
+      className="flex flex-1 items-center justify-center px-6 py-24 text-center text-white"
+    >
       <Image
         src={photos.hero.src}
         alt={photos.hero.alt}
@@ -15,6 +20,7 @@ export default function LandingPage() {
         sizes="100vw"
         loading="eager"
         fetchPriority="high"
+        placeholder="blur"
         className="-z-10 object-cover"
       />
       <div aria-hidden="true" className="absolute inset-0 -z-10 bg-linear-to-b from-ink/30 via-ink/35 to-ink/65" />
