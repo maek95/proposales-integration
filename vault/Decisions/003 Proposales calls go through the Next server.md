@@ -21,7 +21,7 @@ The app needs data from Proposales. The simplest-looking option is calling
 
 ## Decision
 
-The Next.js server. One server-only client per service in `app/_lib/<service>/`; Server
+The Next.js server. One server-only client per service in `app/_clients/<service>/`; Server
 Components call it directly, client components go through a Route Handler. The key stays in a
 server env var and never reaches the browser. The rules that follow from this are in
 `.claude/rules/external-apis.md`.

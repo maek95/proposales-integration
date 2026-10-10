@@ -16,10 +16,10 @@ Steps:
 4. Check, in this order:
    - **Key safety.** `.env` tracked by git (`git ls-files | grep -E '^\.env$'`). Any
      `NEXT_PUBLIC_` on a secret. `inbox_token` reaching the browser or a fixture. Any call to an external API outside its client in
-     `app/_lib/<service>/`. A client imported from a `"use client"` file. The key logged
+     `app/_clients/<service>/`. A client imported from a `"use client"` file. The key logged
      or returned. A Route Handler returning a whole upstream object rather than the fields the
      client uses.
-   - **Resilience.** An external call made without `requestJson` from `app/_lib/external/`, or
+   - **Resilience.** An external call made without `requestJson` from `app/_clients/http.ts`, or
      without a zod schema. A Server Component calling an API outside `attempt()`, or a Route
      Handler not using `errorResponse()`. A failure that's swallowed without a log, or a
      mismatch hidden by trimming or defaulting data. An empty list shown the same way as an

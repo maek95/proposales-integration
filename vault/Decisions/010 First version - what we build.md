@@ -48,8 +48,8 @@ account. Golf clubs sell group days today through an enquiry form and a quote wr
 - **The catalogue** - green fee (18 holes), golf cart, clubhouse lunch - as a typed, zod-validated
   data file in our code. A database only when a feature needs data written at runtime. (Settles
   *Where does our catalogue live?* in [[Open questions]].)
-- **Proposales** through `app/_lib/proposales/` and the shared layer in `app/_lib/external/`: a
-  `createProposal` helper and whatever reads it needs, added with the `proposales-endpoint`
+- **Proposales** through `app/_clients/proposales/` and the shared layer in `app/_clients/http.ts`: a
+  `postProposal` helper and whatever reads it needs, added with the `proposales-endpoint`
   skill. Prices go in the smallest currency unit.
 - **The site** - plain: a page about the club, and the group-days form.
 - **The basics** - mocks for every Proposales call (`PROPOSALES_MOCK`), failures contained to the

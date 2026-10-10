@@ -1,4 +1,4 @@
-import type { Product } from "../products";
+import type { Product } from "../get-products";
 
 // The club's group-day products (ticket BE-1 in vault/Plans/Tickets/).
 export const products: Product[] = [

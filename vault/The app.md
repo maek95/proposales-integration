@@ -73,4 +73,4 @@ headcount. The user chose the simpler list instead.
 ## Still open
 
 - Whether an LLM has a place.
-- The club's photos - free Unsplash stock photos for now, listed in `app/_lib/photos.ts`.
+- The club's photos - free Unsplash stock photos for now, listed in `app/_content/photos.ts`.

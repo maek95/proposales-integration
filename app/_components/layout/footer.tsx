@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { club } from "@/app/_lib/club";
+import { club } from "@/app/_content/club";
 import Container from "../ui/container";
 
 export default function Footer() {

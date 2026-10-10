@@ -21,7 +21,7 @@ Write flows are worse: testing one creates real proposals.
 ## Decision
 
 Typed fixtures behind `PROPOSALES_MOCK`. The switch sits in each helper in
-`app/_lib/proposales/` (fixtures in its `mocks/`), so pages and routes don't know whether data is mocked. Fixtures take
+`app/_clients/proposales/` (fixtures in its `mocks/`), so pages and routes don't know whether data is mocked. Fixtures take
 their shape from one real response but every value is made up - they're committed, and real
 proposals contain other people's names and emails.
 

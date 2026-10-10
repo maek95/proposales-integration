@@ -1,4 +1,4 @@
-import type { Company } from "../companies";
+import type { Company } from "../get-companies";
 
 // Shape taken from a real GET /v3/companies response (6 October 2026), values made up.
 export const companies: Company[] = [

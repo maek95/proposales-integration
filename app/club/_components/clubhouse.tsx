@@ -1,7 +1,7 @@
 import Container from "@/app/_components/ui/container";
 import SectionHeading from "@/app/_components/ui/headings/section-heading";
 import Photo from "@/app/_components/ui/photo";
-import { photos } from "@/app/_lib/photos";
+import { photos } from "@/app/_content/photos";
 
 export default function Clubhouse() {
   return (

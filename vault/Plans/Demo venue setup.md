@@ -5,7 +5,7 @@ Planned 6 October 2026. **Not started** - nothing has been done in the account.
 The Proposales-account side of the first version: what the user sets up by hand in the Proposales
 app, so the drafts our site creates look like they come from the golf club
 ([[006 We're a golf club]]). Steps 1-4 are ticket [[ACC-2 Set up the club in Proposales|ACC-2]] and step 5 is [[ACC-1 Look at the Buyer Portal|ACC-1]] in
-[[First version build]]; they're needed before [[INT-1 First real draft|INT-1]], the first real draft. Everything before
+[[First version build]]; they're needed before the site goes live. Everything before
 that runs against mocks.
 
 *Cut down 7 October 2026:* this plan used to also hold the catalogue, creating it in our repo, and
@@ -27,7 +27,7 @@ products into the Proposales content library with a script.
 1. **Pick the club's name** - and check no real golf club has it.
    *Picked 9 October 2026:* **Tallmora GK**, chosen by Claude when the user asked for the site's
    placeholders to be filled in. A web search found no club with that name. The site's copy is in
-   `app/_lib/club.ts`; the phone number is from PTS's range for fiction, and the email uses the
+   `app/_content/club.ts`; the phone number is from PTS's range for fiction, and the email uses the
    `.example` domain. The account still has to use the name too (steps 2-4).
 2. **Currency** - the company is set to EUR; a Swedish club would use SEK. See whether it can be
    changed in the company settings. (Our blocks carry a currency either way.)

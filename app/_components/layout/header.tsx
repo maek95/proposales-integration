@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { club } from "@/app/_lib/club";
+import { club } from "@/app/_content/club";
 import pill from "../ui/pill";
 import Container from "../ui/container";
 import NavLink from "./nav-link";

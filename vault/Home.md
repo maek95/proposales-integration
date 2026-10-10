@@ -28,6 +28,7 @@ link to them, don't copy them; they change. Nothing in this vault should restate
 
 ## Integrations
 
+- [[API map]] - every API call in the app, outbound and inbound, in one table.
 - **Proposales** - the integration the case is about.
   - [[Proposales overview]] - ways to integrate, the main concepts, limits, links to the official docs.
 - **Vercel AI SDK** - being evaluated for the brief's LLM bonus.

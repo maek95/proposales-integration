@@ -1,11 +1,11 @@
 import Link from "next/link";
-import { club } from "@/app/_lib/club";
+import { club } from "@/app/_content/club";
 import pill from "@/app/_components/ui/pill";
 import Container from "@/app/_components/ui/container";
 import Lead from "@/app/_components/ui/headings/lead";
 import PageHeading from "@/app/_components/ui/headings/page-heading";
 import Photo from "@/app/_components/ui/photo";
-import { photos } from "@/app/_lib/photos";
+import { photos } from "@/app/_content/photos";
 
 export default function Intro() {
   return (

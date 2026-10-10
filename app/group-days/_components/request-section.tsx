@@ -1,5 +1,5 @@
-import { attempt } from "@/app/_lib/external";
-import { listProducts } from "@/app/_lib/golf-booking";
+import { attempt } from "@/app/_clients/http";
+import { getProducts } from "@/app/_clients/golf-booking";
 import Container from "@/app/_components/ui/container";
 import SectionHeading from "@/app/_components/ui/headings/section-heading";
 import RequestForm from "./request-form";
@@ -7,7 +7,7 @@ import RequestForm from "./request-form";
 // Server Component: loads the club's products from the golf booking system and hands them to
 // the interactive form. Without prices the form can't work, so it shows why and disables Send.
 export default async function RequestSection() {
-  const products = await attempt(listProducts);
+  const products = await attempt(getProducts);
 
   return (
     <section id="request">

@@ -18,8 +18,12 @@ description: Where code goes in app/, Server vs Client Components, styling, Type
     `app/layout.tsx`.
   - Anything reused across pages or sections goes in `app/_components/ui/`. Use those rather than
     re-styling.
-  - Non-UI code (API clients, helpers) lives in `app/_lib/`.
-  - Imports use the `@/` alias (`@/app/_lib/proposales`); relative imports are fine within
+  - Non-UI code goes by what it is (`.claude/rules/external-apis.md`): `app/api/` our endpoints -
+    each route the whole backend for its request, its `schema.ts` beside it -
+    `app/_clients/` calls to other systems' APIs, one file per call named for what it does
+    (`get-products.ts`). Site content with no logic - the club's details, photos - is in
+    `app/_content/`. Small pure helpers - dates, money - are in `app/_utils/formatters.ts`.
+  - Imports use the `@/` alias (`@/app/_clients/proposales`); relative imports are fine within
     `_components/`.
 - **Pages are route folders in `app/`** (`app/proposals/page.tsx` → `/proposals`).
   `_`-prefixed folders are private and ignored by routing. Never create a top-level `pages/`
