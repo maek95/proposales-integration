@@ -44,6 +44,7 @@ integrations, **FE** pages and components, **INT** real integration checks, **SH
 
 ## In progress
 
+- [[FE-4 The photos show straight away, and the landing photo runs behind the footer]] - no grey flash on refresh; the landing page fits one screen.
 - [[BE-7 An LLM fills in the form from the visitor's description of the day]] - the LLM feature, per decision 014.
 
 ## Todo
