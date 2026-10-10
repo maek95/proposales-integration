@@ -51,6 +51,26 @@ Built 10 October 2026.
 back with `Cache-Control: public, max-age=315360000, immutable`. Not yet checked on the live
 site.
 
+- **`decoding="sync"` on the landing photo** - *added 10 October 2026, after the user saw the
+  flash still there.* The photos in the repo weren't enough: headless Chrome, recorded frame by
+  frame over the DevTools protocol, still painted the grey overlay for two frames (about 35 ms)
+  on every reload, with the photo already cached - next/image's default `decoding="async"` lets
+  the browser show the page before the photo is decoded, and the blurred placeholder (an SVG
+  background) is decoded no sooner. With `sync` the photo is in the first frame on a reload and
+  on a first visit over a fast connection. On a slow connection (simulated slow 4G) a first
+  visit shows the blurred placeholder at 0.7 s, the photo drawing in from the top at 1.5 s, and
+  the sharp photo at 2.5 s - the download, which no attribute can skip. `priority` (now
+  `preload` in Next 16) wouldn't have helped: it's about *fetching* sooner, and the hero already
+  has `loading="eager"` and `fetchPriority="high"`.
+
+  *Asked by the user: is `sync` bad for SEO?* No - Google ranks on the Core Web Vitals (LCP,
+  INP, CLS), and LCP here is the hero photo's paint, which `sync` makes come sooner, not later
+  (first photo frame on reload: 131 ms with `async`, 66 ms with `sync`, two separate runs).
+  `sync` never waits for the download, only for the decode once the bytes are there; at worst
+  the text appears a few ms later on a reload (FCP, not a ranking signal). Only the hero has
+  it - the club page's photos keep `async`. The bigger LCP lever is the photo's size: on a
+  retina screen the hero asks for 3840 px and gets the 2400-px original.
+
 ### The landing footer
 
 - **The root layout** wraps `<main>` and the footer in one positioned box

@@ -20,6 +20,10 @@ export default function LandingPage() {
         sizes="100vw"
         loading="eager"
         fetchPriority="high"
+        // Paint the photo together with the page, never the page without it: with the default
+        // ("async") Chrome showed the grey overlay for a few frames on every reload, while the
+        // already-cached photo was still being decoded.
+        decoding="sync"
         placeholder="blur"
         className="-z-10 object-cover"
       />
