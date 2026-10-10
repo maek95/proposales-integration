@@ -44,8 +44,7 @@ integrations, **FE** pages and components, **INT** real integration checks, **SH
 
 ## In progress
 
-- [[FE-4 The photos show straight away, and the landing photo runs behind the footer]] - no grey flash on refresh; the landing page fits one screen.
-- [[BE-7 An LLM fills in the form from the visitor's description of the day]] - the LLM feature, per decision 014.
+- [[BE-8 Describe your day says what it filled in, and lists only real things it couldn't add]] - vague wishes no longer show as missing products.
 
 ## Todo
 
@@ -60,6 +59,8 @@ In order - the top one is next.
 
 ## Done
 
+- [[FE-4 The photos show straight away, and the landing photo runs behind the footer]] - 10 October 2026
+- [[BE-7 An LLM fills in the form from the visitor's description of the day]] - 10 October 2026
 - [[FE-3 The form asks how many you are before anything else]] - 10 October 2026
 - [[SHIP-3 Decide on an LLM, and a bigger catalogue]] - 10 October 2026
 - [[SHIP-1 Deploy on Vercel]] - 10 October 2026

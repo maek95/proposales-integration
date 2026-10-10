@@ -108,20 +108,28 @@ export default function DescribeDay({
           <div className="rounded-card bg-panel px-4.5 py-4">
             <p className="font-semibold">
               {filled.items.length === 0
-                ? "We couldn't place anything from your description in the form - pick below instead."
-                : `Filled in ${filled.items.length} ${filled.items.length === 1 ? "line" : "lines"} from your description - check them below.`}
+                ? "Nothing in your description matched what we offer - pick below, or tell us more about the day."
+                : filled.items.length === 1
+                  ? "Filled in 1 line from your description - check it below."
+                  : `Filled in ${filled.items.length} lines from your description - check them below.`}
             </p>
+            {filled.items.length > 0 && filled.items.length <= 2 && (
+              <p className="mt-1 text-muted">
+                For more of the day, say what you&apos;d like - to eat, to drink, how you&apos;ll play.
+              </p>
+            )}
             {filled.unmatched.length > 0 && (
               <>
-                <p className="mt-2 text-muted">
-                  We couldn&apos;t place these in the form. If you find them below, pick them yourself -
-                  if not, mention them to the club when your offer arrives:
-                </p>
-                <ul className="mt-1 list-disc pl-5 text-muted">
+                <p className="mt-3 font-semibold">Not added to the form:</p>
+                <ul className="mt-1 list-disc pl-5">
                   {filled.unmatched.map((wish) => (
                     <li key={wish}>{wish}</li>
                   ))}
                 </ul>
+                <p className="mt-1 text-muted">
+                  If you find it below, pick it yourself - if not, mention it to the club when your
+                  offer arrives.
+                </p>
               </>
             )}
           </div>

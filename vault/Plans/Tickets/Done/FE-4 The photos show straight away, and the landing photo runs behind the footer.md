@@ -1,7 +1,6 @@
 # FE-4 The photos show straight away, and the landing photo runs behind the footer
 
-**Status:** In progress - built and committed 10 October 2026 on branch `FE-4`; waiting for a
-look on its preview deployment.
+**Status:** Done 10 October 2026 - merged into `main` by the user.
 **Blocked by:** nothing.
 **Done when:**
 - refreshing any page in production shows the photo at once - a blurred preview, then the

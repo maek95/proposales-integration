@@ -1,7 +1,7 @@
 # BE-7 An LLM fills in the form from the visitor's description of the day
 
-**Status:** In progress - built 10 October 2026 on branch `BE-7`; waiting for a Gateway key, the
-firewall rule and a click-through (below).
+**Status:** Done 10 October 2026 - merged into `main` by the user. A follow-up is
+[[BE-8 Describe your day says what it filled in, and lists only real things it couldn't add|BE-8]].
 **Blocked by:** [[FE-3 The form asks how many you are before anything else|FE-3]] (the headcount goes into the prompt).
 The bigger catalogue is done, in [[SHIP-3 Decide on an LLM, and a bigger catalogue|SHIP-3]].
 **Done when:** on the live site, a visitor sets the headcount, describes the day, presses
@@ -118,4 +118,3 @@ off' in notOnTheList."* - got lunch × 16 and nothing else, in 1.7 s.
 
 So the guards hold, and the small model is quick but loose on quantities: it reads "a few beers"
 as a few for the table, and drops half the group from one product or another.
-
