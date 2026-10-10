@@ -33,13 +33,10 @@ that research was exactly what a reviewer would want to see.
   - Work agreed but not started gets a step-by-step note in `Plans/`, marked *Not started* until
     it is. When it's done, the plan says so and links the decision that records it.
   - A ticket on a board is its own note in `Plans/Tickets/`, named `<ID> <title>` - never a
-    section of the board - in the folder for its status: `Todo/`, `In progress/` or `Done/`. Its status, blockers, *Done when* and what happened live in the
-    ticket; the board only links it under a column. Mention a ticket as a link,
-    `[[BE-2 createProposal, with its fixture|BE-2]]`.
-  - **The ticket is the work.** What it asks for and what it produces - a table, a checklist,
-    the outcome - are written in the ticket itself, not in another note it points to.
-    It doesn't direct other tickets either ("update BE-2 from this"): a ticket that needs
-    another's result says so in its own *Blocked by*.
+    section of the board - in the folder for its status: `Todo/`, `In progress/` or `Done/`.
+    The board only links it under a column. Mention a ticket as a link,
+    `[[BE-2 createProposal, with its fixture|BE-2]]`. How a ticket is written is in
+    `tickets.md`.
   - A new idea is a line in the matching note in `Ideas/`.
   - A finding about an integration is a line in its overview under `Integrations/<name>/`. A
     new integration - including one we're only evaluating - gets its own folder there.

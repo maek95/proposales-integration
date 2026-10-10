@@ -132,6 +132,8 @@ account: it can't read or write proposals. So it's a tool for whoever builds the
 (Claude Code, a developer's assistant), not a way to give our site's LLM knowledge - our feature
 needs the club's catalogue, which isn't in Proposales at all
 ([[014 Headcount first, then describe your day]]). The docs also publish `llms.txt`.
+*Added 10 October 2026, from the user:* it's in the repo's `.mcp.json` as `proposales-docs`, so
+Claude Code can look up endpoints and shapes while building instead of guessing.
 
 The connection powerup is enabled by Proposales customer success - see
 [Connections](https://docs.proposales.com/connections). Once deployed on Vercel the app has a
@@ -199,6 +201,16 @@ public site, not the logged-in app. What we build should add to this, not repeat
 - **A proposal can record where it came from** - `tracking.created_from_template` (a template's
   uuid) and `tracking.created_from_rfp` (an inbox request's id). Whether the template link copies
   the template's content or only records lineage isn't stated - check on a real draft.
+- **No limit on blocks in a proposal.** Checked 10 October 2026, from the spec and a search of
+  the docs (through the docs MCP server): `blocks` on `POST /v3/proposals` has no `maxItems`,
+  and no page mentions a cap. A group-day draft has one block per product picked - at most the
+  catalogue's 27 - so size isn't a concern. Not yet tried on a real draft with that many.
+- **A block can price per person, and take its quantity from a formula.** Found 10 October 2026,
+  in the proposal-block docs: `unit` can be `person` (or `unit`, `h`, `day`, `night`...), and a
+  quantity formula can read proposal variables - the docs' example is a quantity set from a
+  number the customer gave in an inbox request. So the headcount could drive green fees inside
+  Proposales, and follow along if the club changes it. Not used yet; relevant to
+  [[BE-5 Every line in the Proposales draft shows its price and quantity|BE-5]].
 - **Companies, templates and the inbox have no create endpoints** - they're set up by hand in
   the Proposales app.
 - **No documented rate limit.** Checked 6 October 2026: no `429` response in the OpenAPI spec,

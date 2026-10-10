@@ -1,4 +1,4 @@
-# SHIP-2 A README for reviewers
+# SHIP-2 A README that lets a reviewer run the app and find the reasoning
 
 **Status:** Todo
 **Blocked by:** [[SHIP-1 Deploy on Vercel|SHIP-1]].

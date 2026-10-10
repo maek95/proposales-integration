@@ -1,6 +1,6 @@
 import { z } from "zod";
 import { club } from "@/app/_content/club";
-import { formatLongDate } from "@/app/_utils/formatters";
+import { formatLongDate, formatPeople } from "@/app/_utils/formatters";
 import { attempt } from "@/app/_clients/http";
 import { getProducts } from "@/app/_clients/golf-booking";
 import { postProposal } from "@/app/_clients/proposales";
@@ -33,9 +33,9 @@ export async function POST(request: Request) {
   const created = await attempt(() =>
     postProposal({
       language: "en",
-      title: `Golf day for ${input.company}`,
+      title: `Golf day for ${input.company}, ${formatPeople(input.headcount)}`,
       // The proposal's intro - the customer reads it once the club sends the offer.
-      description: `Your golf day at ${club.name} on **${formatLongDate(input.date)}**, as requested through our website.`,
+      description: `Your golf day for ${formatPeople(input.headcount)} at ${club.name} on **${formatLongDate(input.date)}**, as requested through our website.`,
       recipient: { name: input.name, email: input.email, companyName: input.company },
       items: picks.map(({ productId, quantity }) => {
         const product = catalogue.get(productId)!;
@@ -46,8 +46,15 @@ export async function POST(request: Request) {
           unitPriceKr: product.priceKr,
         };
       }),
-      // How the club, or a later sync, tells website requests apart in Proposales.
-      data: { source: "website", form: "group-days", request_id: crypto.randomUUID(), preferred_date: input.date },
+      // How the club, or a later sync, tells website requests apart in Proposales - and finds
+      // them by size.
+      data: {
+        source: "website",
+        form: "group-days",
+        request_id: crypto.randomUUID(),
+        preferred_date: input.date,
+        headcount: String(input.headcount),
+      },
     }),
   );
   // A service we depend on failed - we're a gateway, so 502.

@@ -44,20 +44,19 @@ integrations, **FE** pages and components, **INT** real integration checks, **SH
 
 ## In progress
 
-Nothing right now.
+- [[FE-3 The form asks how many you are before anything else]] - a required "How many are you?" before the rest of the form. Built, waiting for a click-through.
 
 ## Todo
 
 In order - the top one is next.
 
-- [[FE-3 Headcount first]] - a required "How many are you?" before the rest of the form.
-- [[BE-7 Describe your day fills in the form]] - the LLM feature, per decision 014.
-- [[BE-5 Prices and quantities in the draft]] - the first real draft showed no prices.
-- [[BE-4 Daily cap on drafts]] - at most N drafts a day reach the account, whoever sends. Can wait, per the user.
-- [[ACC-1 Look at the Buyer Portal]] - the user, in the Proposales app.
-- [[ACC-2 Set up the club in Proposales]]
-- [[SHIP-2 A README for reviewers]]
-- [[SHIP-4 Review and send]]
+- [[BE-7 An LLM fills in the form from the visitor's description of the day]] - the LLM feature, per decision 014.
+- [[BE-5 Every line in the Proposales draft shows its price and quantity]] - the first real draft showed no prices.
+- [[BE-4 A daily cap on how many drafts the website can create in Proposales]] - at most N drafts a day reach the account, whoever sends. Can wait, per the user.
+- [[ACC-1 Check whether Proposales' Buyer Portal already does what our form does]] - the user, in the Proposales app.
+- [[ACC-2 Set up the golf club in the Proposales account - company, currency, template]]
+- [[SHIP-2 A README that lets a reviewer run the app and find the reasoning]]
+- [[SHIP-4 Review the repo against the brief, then send the case in]]
 
 ## Done
 

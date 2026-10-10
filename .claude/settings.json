@@ -12,7 +12,14 @@
       "Bash(git ls-files*)"
     ],
     "deny": [
-      "Read(./.env)"
+      "Read(./.env)",
+      "Bash(git checkout -b*)",
+      "Bash(git checkout -B*)",
+      "Bash(git switch -c*)",
+      "Bash(git switch -C*)",
+      "Bash(git switch --create*)",
+      "Bash(git branch *)",
+      "Bash(git worktree add*)"
     ]
   }
 }

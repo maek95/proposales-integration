@@ -1,4 +1,4 @@
-# ACC-1 Look at the Buyer Portal
+# ACC-1 Check whether Proposales' Buyer Portal already does what our form does
 
 **Status:** Todo
 **Blocked by:** nothing (the user, in the Proposales app).

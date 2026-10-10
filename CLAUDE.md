@@ -42,7 +42,7 @@ Non-UI code is organised by the direction of the call: `app/api/` is our backend
   its schemas, types and helper, `index.ts` re-exporting them, `mocks/` (one fixture per call). Currently `proposales/` and
   `golf-booking/` (the club's booking system - mocked, its fixtures are the data).
 - `app/_content/` - site content, no logic: the club's details (`club.ts`), the photos.
-- `app/_utils/` - small pure helpers, safe on either side: `formatters.ts` (money, dates).
+- `app/_utils/` - small pure helpers, safe on either side: `formatters.ts` (money, dates, counts).
 - `app/globals.css` - Tailwind `@theme` tokens.
 - `vault/` - the Obsidian vault for the whole repo: the brief, the product, each integration
   under `Integrations/`, ideas, and the decisions log. `Home.md` says what goes in each note; `.claude/rules/vault.md` says
@@ -87,11 +87,14 @@ them rather than writing it twice. Say where it went in one line at the end of t
 - `external-apis.md` - any third-party API: one server-only client per service, secrets,
   request time, never trusting responses, failing per feature, call volume, mock data.
 - `proposales.md` - only what's specific to Proposales: money in the smallest currency unit,
-  the inbox token, the interview account, recipients' data, the spec's nullability.
+  the inbox token, the interview account, recipients' data, the spec's nullability, the
+  docs MCP server.
 - `code-conventions.md` - where code goes, pages as route folders, Server vs Client
   Components, styling, TypeScript, keeping it small.
 - `vault.md` - when a decision, finding, proposal or open question goes into `vault/`, which
   note owns it, and how a reversal is recorded.
+- `tickets.md` - how a ticket is written, wherever it lives: a title that says what changes,
+  the work in the ticket itself, its own *Blocked by*.
 
 When the user says a rule should exist, write it in the rule file it belongs to, in the same
 voice as the rest of that file. Then say where it went, so they can trim it. If no file fits,
@@ -100,10 +103,12 @@ add a new one here with a `description:` line at the top and list it above.
 ## Automation
 
 - `.claude/settings.json` - allows lint, build, typecheck and read-only git commands without a
-  prompt, and denies reading `.env`.
+  prompt, and denies reading `.env` and creating branches (`checkout -b`, `switch -c`,
+  `git branch <name>`, `worktree add`) - the user creates the branch before a ticket starts.
 - `.claude/agents/submission-reviewer.md` - reviews the repo against the brief and the rules,
   the way a Proposales reviewer would, and reports what to fix. It never edits.
-- `.mcp.json` - project MCP servers. Empty for now.
+- `.mcp.json` - project MCP servers: `proposales-docs`, Proposales' public docs and OpenAPI spec
+  (no key, no account access). Each developer approves it once on first use.
 
 ## Before you finish
 

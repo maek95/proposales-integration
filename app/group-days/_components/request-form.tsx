@@ -2,18 +2,25 @@
 
 import { useState, useTransition } from "react";
 import { club } from "@/app/_content/club";
-import { formatKr } from "@/app/_utils/formatters";
+import { formatKr, formatPeople } from "@/app/_utils/formatters";
 import type { Product } from "@/app/_clients/golf-booking";
 import type { FieldErrors, GroupDayRequest, SendResult } from "@/app/api/group-days/requests/schema";
-import { MAX_QUANTITY_PER_PRODUCT } from "@/app/api/group-days/requests/limits";
+import { MAX_HEADCOUNT, MAX_QUANTITY_PER_PRODUCT } from "@/app/api/group-days/requests/limits";
 import Button from "@/app/_components/ui/button";
 import ErrorNotice from "@/app/_components/ui/error-notice";
 import Field from "@/app/_components/ui/field";
+import SelectField from "@/app/_components/ui/select-field";
 import Stepper from "@/app/_components/ui/stepper";
 
 type Details = Pick<GroupDayRequest, "date" | "company" | "name" | "email">;
 
 const emptyDetails: Details = { date: "", company: "", name: "", email: "" };
+
+// Every number up to 40, then in fours - golf is played in groups of four, and the offer is where
+// the exact number gets adjusted.
+const headcountOptions = Array.from({ length: MAX_HEADCOUNT }, (_, i) => i + 1).filter(
+  (count) => count <= 40 || count % 4 === 0,
+);
 
 /** POST /api/group-days/requests - our own API; the server talks to Proposales. */
 async function postRequest(request: GroupDayRequest): Promise<SendResult> {
@@ -48,6 +55,7 @@ export default function RequestForm({
   products: Product[] | null;
   productsError?: string;
 }) {
+  const [headcount, setHeadcount] = useState<number | null>(null);
   const [quantities, setQuantities] = useState<Record<string, number>>({});
   const [details, setDetails] = useState<Details>(emptyDetails);
   const [fieldErrors, setFieldErrors] = useState<FieldErrors>({});
@@ -63,7 +71,10 @@ export default function RequestForm({
   const categories = [...new Set(lines.map((line) => line.product.category))];
   const picked = lines.filter((line) => line.quantity > 0);
   const totalKr = lines.reduce((sum, line) => sum + line.amountKr, 0);
-  const canSend = picked.length > 0 && !serviceError && !isSending;
+  const canSend = headcount !== null && picked.length > 0 && !serviceError && !isSending;
+  // The headcount comes first; the rest of the form appears once it's set. Without prices
+  // there's nothing to ask for, so the error shows straight away.
+  const showRest = headcount !== null || products === null;
 
   function step(productId: string, by: -1 | 1) {
     setQuantities((current) => {
@@ -73,19 +84,25 @@ export default function RequestForm({
     setFieldErrors((current) => without(current, "items"));
   }
 
+  function chooseHeadcount(value: string) {
+    setHeadcount(Number(value));
+    setFieldErrors((current) => without(current, "headcount"));
+  }
+
   function setDetail(field: keyof Details, value: string) {
     setDetails((current) => ({ ...current, [field]: value }));
     setFieldErrors((current) => without(current, field));
   }
 
   function send() {
+    if (headcount === null) return;
     setServiceError(null);
     startSending(async () => {
       const items = lines.map(({ product, quantity }) => ({ productId: product.id, quantity }));
-      const result = await postRequest({ ...details, items });
+      const result = await postRequest({ headcount, ...details, items });
       if (result.ok) {
         setSentSummary(
-          [...picked.map((line) => `${line.quantity} × ${line.product.name}`), `${formatKr(totalKr)} indicative`].join(" · "),
+          [formatPeople(headcount), ...picked.map((line) => `${line.quantity} × ${line.product.name}`), `${formatKr(totalKr)} indicative`].join(" · "),
         );
       } else if ("fieldErrors" in result) {
         setFieldErrors(result.fieldErrors);
@@ -96,6 +113,7 @@ export default function RequestForm({
   }
 
   function startOver() {
+    setHeadcount(null);
     setQuantities({});
     setDetails(emptyDetails);
     setFieldErrors({});
@@ -166,98 +184,128 @@ export default function RequestForm({
           </ErrorNotice>
         )}
 
-        <fieldset aria-describedby={fieldErrors.items ? "items-error" : undefined}>
-          <legend className="mb-3.5 text-lg font-bold">1 · What the day needs</legend>
-          {products === null ? (
-            <ErrorNotice title="Prices aren't available right now.">
-              {productsError} Group requests are paused - please try again later.
-            </ErrorNotice>
-          ) : products.length === 0 ? (
-            <p className="rounded-card bg-panel px-4.5 py-4 text-muted">
-              The club has no group-day products online right now.
-            </p>
-          ) : (
-            <div className="flex flex-col gap-6">
-              {categories.map((category) => (
-                <div key={category}>
-                  <h3 className="mb-2.5 text-sm font-semibold text-muted">{category}</h3>
-                  <div className="flex flex-col gap-2.5">
-                    {lines
-                      .filter((line) => line.product.category === category)
-                      .map(({ product, quantity }) => (
-                        <div
-                          key={product.id}
-                          className="flex flex-wrap items-center gap-x-5 gap-y-3 rounded-card bg-panel px-4.5 py-4"
-                        >
-                          <div className="min-w-0 flex-[1_1_200px]">
-                            <div className="text-[17px] font-bold">{product.name}</div>
-                            <div className="text-sm text-subtle">
-                              {product.priceKr === 0 ? "Included" : `${formatKr(product.priceKr)} ${product.unit}`}
-                            </div>
-                          </div>
-                          <Stepper
-                            value={quantity}
-                            max={MAX_QUANTITY_PER_PRODUCT}
-                            label={product.name}
-                            onStep={(by) => step(product.id, by)}
-                          />
-                        </div>
-                      ))}
-                  </div>
-                </div>
-              ))}
-            </div>
-          )}
-          {fieldErrors.items && (
-            <p id="items-error" className="mt-2 font-semibold text-field-error">
-              {fieldErrors.items}
-            </p>
-          )}
-        </fieldset>
-
         <fieldset>
-          <legend className="mb-3.5 text-lg font-bold">2 · When and who</legend>
-          <div className="flex flex-wrap gap-4">
-            <Field
-              label="Preferred date"
-              name="date"
-              type="date"
-              value={details.date}
-              onChange={(event) => setDetail("date", event.target.value)}
-              error={fieldErrors.date}
-            />
-            <Field
-              label="Company"
-              name="company"
-              autoComplete="organization"
-              placeholder="Company or group name"
-              value={details.company}
-              onChange={(event) => setDetail("company", event.target.value)}
-              error={fieldErrors.company}
-            />
-            <Field
-              label="Your name"
-              name="name"
-              autoComplete="name"
-              value={details.name}
-              onChange={(event) => setDetail("name", event.target.value)}
-              error={fieldErrors.name}
-            />
-            <Field
-              label="Email"
-              name="email"
-              type="email"
-              autoComplete="email"
-              value={details.email}
-              onChange={(event) => setDetail("email", event.target.value)}
-              error={fieldErrors.email}
-            />
+          <legend className="mb-3.5 text-lg font-bold">1 · Your group</legend>
+          <div className="flex max-w-sm">
+            <SelectField
+              label="How many are you?"
+              name="headcount"
+              required
+              disabled={products === null}
+              value={headcount ?? ""}
+              onChange={(event) => chooseHeadcount(event.target.value)}
+              error={fieldErrors.headcount}
+            >
+              <option value="" disabled>
+                Choose a number
+              </option>
+              {headcountOptions.map((count) => (
+                <option key={count} value={count}>
+                  {formatPeople(count)}
+                </option>
+              ))}
+            </SelectField>
           </div>
         </fieldset>
+
+        {showRest && (
+          <>
+            <fieldset aria-describedby={fieldErrors.items ? "items-error" : undefined}>
+              <legend className="mb-3.5 text-lg font-bold">2 · What the day needs</legend>
+              {products === null ? (
+                <ErrorNotice title="Prices aren't available right now.">
+                  {productsError} Group requests are paused - please try again later.
+                </ErrorNotice>
+              ) : products.length === 0 ? (
+                <p className="rounded-card bg-panel px-4.5 py-4 text-muted">
+                  The club has no group-day products online right now.
+                </p>
+              ) : (
+                <div className="flex flex-col gap-6">
+                  {categories.map((category) => (
+                    <div key={category}>
+                      <h3 className="mb-2.5 text-sm font-semibold text-muted">{category}</h3>
+                      <div className="flex flex-col gap-2.5">
+                        {lines
+                          .filter((line) => line.product.category === category)
+                          .map(({ product, quantity }) => (
+                            <div
+                              key={product.id}
+                              className="flex flex-wrap items-center gap-x-5 gap-y-3 rounded-card bg-panel px-4.5 py-4"
+                            >
+                              <div className="min-w-0 flex-[1_1_200px]">
+                                <div className="text-[17px] font-bold">{product.name}</div>
+                                <div className="text-sm text-subtle">
+                                  {product.priceKr === 0 ? "Included" : `${formatKr(product.priceKr)} ${product.unit}`}
+                                </div>
+                              </div>
+                              <Stepper
+                                value={quantity}
+                                max={MAX_QUANTITY_PER_PRODUCT}
+                                label={product.name}
+                                onStep={(by) => step(product.id, by)}
+                              />
+                            </div>
+                          ))}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
+              {fieldErrors.items && (
+                <p id="items-error" className="mt-2 font-semibold text-field-error">
+                  {fieldErrors.items}
+                </p>
+              )}
+            </fieldset>
+
+            <fieldset>
+              <legend className="mb-3.5 text-lg font-bold">3 · When and who</legend>
+              <div className="flex flex-wrap gap-4">
+                <Field
+                  label="Preferred date"
+                  name="date"
+                  type="date"
+                  value={details.date}
+                  onChange={(event) => setDetail("date", event.target.value)}
+                  error={fieldErrors.date}
+                />
+                <Field
+                  label="Company"
+                  name="company"
+                  autoComplete="organization"
+                  placeholder="Company or group name"
+                  value={details.company}
+                  onChange={(event) => setDetail("company", event.target.value)}
+                  error={fieldErrors.company}
+                />
+                <Field
+                  label="Your name"
+                  name="name"
+                  autoComplete="name"
+                  value={details.name}
+                  onChange={(event) => setDetail("name", event.target.value)}
+                  error={fieldErrors.name}
+                />
+                <Field
+                  label="Email"
+                  name="email"
+                  type="email"
+                  autoComplete="email"
+                  value={details.email}
+                  onChange={(event) => setDetail("email", event.target.value)}
+                  error={fieldErrors.email}
+                />
+              </div>
+            </fieldset>
+          </>
+        )}
       </div>
 
       <aside aria-label="Your day" className="min-w-0 flex-[1_1_300px] rounded-panel bg-ink p-7 text-white">
-        <div className="mb-4 text-sm font-semibold text-on-dark-muted">Your day</div>
+        <div className="mb-4 text-sm font-semibold text-on-dark-muted">
+          Your day{headcount !== null && ` · ${formatPeople(headcount)}`}
+        </div>
         {picked.length === 0 ? (
           <p className="border-b border-on-dark-rule py-2 text-[15px] text-on-dark-muted">Nothing picked yet.</p>
         ) : (

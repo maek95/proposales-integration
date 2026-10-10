@@ -1,9 +1,14 @@
-// Small pure helpers for dates and money - no calls, no state, safe in the browser and on the
+// Small pure helpers for dates, money and counts - no calls, no state, safe in the browser and on the
 // server.
 
 /** Whole kronor, Swedish style: 10 400 kr. */
 export function formatKr(amount: number) {
   return `${amount.toLocaleString("sv-SE")} kr`;
+}
+
+/** 1 → "1 person", 16 → "16 people". */
+export function formatPeople(count: number) {
+  return `${count} ${count === 1 ? "person" : "people"}`;
 }
 
 /** "2027-06-12" → "Saturday 12 June 2027". */

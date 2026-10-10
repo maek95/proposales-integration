@@ -60,7 +60,7 @@ spam shows up.
 - **Who's sending, without a login.** Only the IP address, which a VPN changes at will and an
   office shares. A per-IP limit is a speed bump for the casual case, not identity. The
   guarantee is the **site-wide daily cap** - it bounds the damage whoever sends, from wherever.
-- **Revised proposal:** honeypot + site-wide daily cap (now [[BE-4 Daily cap on drafts|BE-4]]) counted in Proposales (no new service);
+- **Revised proposal:** honeypot + site-wide daily cap (now [[BE-4 A daily cap on how many drafts the website can create in Proposales|BE-4]]) counted in Proposales (no new service);
   a per-IP limit through Vercel's firewall or Upstash on top; Turnstile if spam shows up.
 
 ## Settled

@@ -36,12 +36,12 @@ days - about 27 products in five groups: course, hire and shop, food, drinks, co
 prizes, built in [[SHIP-3 Decide on an LLM, and a bigger catalogue|SHIP-3]]. Then the form asks in this order:
 
 1. **How many are you?** - a required select, before anything else
-   ([[FE-3 Headcount first|FE-3]]). A number the visitor knows exactly stays a field, not
+   ([[FE-3 The form asks how many you are before anything else|FE-3]]). A number the visitor knows exactly stays a field, not
    something a model guesses.
 2. **Describe your day** - an optional text box. *"Half have never played, lunch before, a few
    beers and something sweet after, prizes for the longest drive."* An LLM turns it into
    quantities across the whole catalogue, and the steppers fill in
-   ([[BE-7 Describe your day fills in the form|BE-7]]).
+   ([[BE-7 An LLM fills in the form from the visitor's description of the day|BE-7]]).
 3. The visitor checks and adjusts every stepper, then sends - as today.
 
 Why this passes both rules: across 27 products, prose like that maps onto a dozen lines -
@@ -66,8 +66,8 @@ the visitor's day. It's a tool for us while building, not for the feature
 - **Decision [[009 A simple item list, Proposales does the proposal|009]]'s three basic items
   are now the start of a longer list** - still an item list, still Proposales doing the proposal.
 - **A new paid, public endpoint** - it needs a max input and output length and a per-visitor
-  limit, like Send ([[BE-4 Daily cap on drafts|BE-4]], `.claude/rules/external-apis.md`).
+  limit, like Send ([[BE-4 A daily cap on how many drafts the website can create in Proposales|BE-4]], `.claude/rules/external-apis.md`).
 - **VAT differs per product** now (golf, food, alcohol, goods) - which
-  [[BE-5 Prices and quantities in the draft|BE-5]] already expects to come from our product data.
+  [[BE-5 Every line in the Proposales draft shows its price and quantity|BE-5]] already expects to come from our product data.
 - **With more time:** E ("Ask the club") on the same AI client, and the date from the
   description ("a Friday in early June") checked against availability.
