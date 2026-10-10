@@ -24,7 +24,7 @@ export const products: Product[] = [
     id: "beginner-clinic",
     category: "On the course",
     name: "Beginner clinic with the club pro",
-    description: "An hour on the range and the putting green for players who've never played.",
+    description: "An hour with the club pro on the range and the putting green - for players who've never played, or anyone who wants a guide and a few pointers before the round.",
     unit: "per group of up to 8",
     priceKr: 1500,
   },

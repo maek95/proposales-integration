@@ -3,6 +3,36 @@
 Things discussed but not settled, with the options and any recommendation. When one is settled
 it becomes a note in [[Decisions]], and its entry here links there and moves to *Settled*.
 
+## How does "describe your day" get the quantities right?
+
+Raised 10 October 2026, after the first real calls with `openai/gpt-4.1-mini` (the `low` tier,
+thinking off). It picks the right *products* most of the time - and better once the catalogue
+says who a product is for - but counts loosely, even with the rule spelled out in the prompt:
+
+- 2 beginner clinics for 8 beginners, twice - a clinic is "per group of up to 8", so 1;
+- "a few beers" for 16 people became 2 or 3 glasses in all;
+- half the group left without a green fee in one answer.
+
+Only *which* products is the model's job by nature; *how many* is arithmetic on the headcount
+and each product's unit. Options:
+
+- **A - the `high` tier** (`openai/gpt-5-mini`), thinking off, then on. Two calls to find out;
+  likely a few seconds more of waiting.
+- **B - code does the counting.** The model answers *which* products and *who each is for* -
+  everyone, the beginners, the players, the group - plus a number only where the visitor gave
+  one ("two bottles of wine"); code turns that into quantities from the headcount and the unit
+  ("per group of up to 8" → one per 8). Exact every time, but the units become structured data
+  rather than text, and the schema and the route grow.
+- **C - leave it.** Most lines are right, and the visitor checks every stepper before Send.
+
+Proposed 10 October 2026: B - it removes the kind of mistake rather than hoping a bigger model
+avoids it - after trying A once, so we know what the bigger model does.
+
+*Same day, from the user:* "half need help with clubs and guide" got rental clubs but no beginner
+clinic. The clinic's catalogue text said only "for players who've never played"; it now says
+"or anyone who wants a guide and a few pointers before the round", and the same sentence gets
+the clinic - though 2 of them for 8 people.
+
 ## When is the deadline?
 
 Raised 6 October 2026. The email says "Monday next week" - 2026-10-12 if it arrived the week of

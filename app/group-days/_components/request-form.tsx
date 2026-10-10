@@ -2,7 +2,7 @@
 
 import { useState, useTransition } from "react";
 import { club } from "@/app/_content/club";
-import { formatKr, formatPeople } from "@/app/_utils/formatters";
+import { formatKr, formatPeople, todayInSweden } from "@/app/_utils/formatters";
 import type { Product } from "@/app/_clients/golf-booking";
 import type { FieldErrors, GroupDayRequest, SendResult } from "@/app/api/group-days/requests/schema";
 import type { Suggestion } from "@/app/api/group-days/suggest/schema";
@@ -184,9 +184,11 @@ export default function RequestForm({
   }
 
   return (
+    // The browser checks what it can before Send calls anything: a required field left empty, an
+    // email that isn't one, a date in the past - it scrolls to the first one and says what's
+    // wrong. The route checks everything again (schema.ts), because the browser can be skipped.
     <form
       aria-label="Group day request"
-      noValidate
       onSubmit={(event) => {
         event.preventDefault();
         if (canSend) send();
@@ -296,6 +298,8 @@ export default function RequestForm({
                   label="Preferred date"
                   name="date"
                   type="date"
+                  required
+                  min={todayInSweden()}
                   value={details.date}
                   onChange={(event) => setDetail("date", event.target.value)}
                   error={fieldErrors.date}
@@ -303,6 +307,8 @@ export default function RequestForm({
                 <Field
                   label="Company"
                   name="company"
+                  required
+                  maxLength={200}
                   autoComplete="organization"
                   placeholder="Company or group name"
                   value={details.company}
@@ -312,6 +318,8 @@ export default function RequestForm({
                 <Field
                   label="Your name"
                   name="name"
+                  required
+                  maxLength={200}
                   autoComplete="name"
                   value={details.name}
                   onChange={(event) => setDetail("name", event.target.value)}
@@ -321,6 +329,7 @@ export default function RequestForm({
                   label="Email"
                   name="email"
                   type="email"
+                  required
                   autoComplete="email"
                   value={details.email}
                   onChange={(event) => setDetail("email", event.target.value)}
