@@ -65,6 +65,11 @@ date, sees an indicative total, and sends it. Everything after that happens in P
 *Earlier proposal, 6 October 2026:* packages, headcount and toggles, with quantities derived from
 headcount. The user chose the simpler list instead.
 
+*Changed 10 October 2026* ([[014 Headcount first, then describe your day]]): the list grows to
+about 27 products in five groups - course, hire and shop, food, drinks, competition and prizes.
+The form asks **how many you are** first, then offers an optional **describe your day** box that
+an LLM turns into quantities; the visitor checks the steppers and sends.
+
 ## Out of scope
 
 - Individual tee-time booking - that's the club's ordinary booking system.
@@ -72,5 +77,4 @@ headcount. The user chose the simpler list instead.
 
 ## Still open
 
-- Whether an LLM has a place.
 - The club's photos - free Unsplash stock photos for now, listed in `app/_content/photos.ts`.

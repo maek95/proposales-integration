@@ -2,7 +2,7 @@
 
 Every endpoint in the Proposales API, what we use, and where an LLM could fit. Read from the
 [OpenAPI spec](https://docs.proposales.com/openapi.json) (version 2026.09.02) on 10 October 2026,
-for [[SHIP-3 Decide on an LLM|SHIP-3]]. Fields and parameters are in the spec - this note holds
+for [[SHIP-3 Decide on an LLM, and a bigger catalogue|SHIP-3]]. Fields and parameters are in the spec - this note holds
 what we concluded. What the app calls today, both directions, is the [[API map]].
 
 ## The endpoints

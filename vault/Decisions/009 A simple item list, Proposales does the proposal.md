@@ -30,3 +30,7 @@ adjustments, extras, the offer page, signature, deposit - is Proposales'.
 - The catalogue shrinks to a handful of basic items (see [[Demo venue setup]]).
 - Our UI stays small; the interesting work after sending happens in Proposales.
 - More items or packages can be added later if the simple version holds up.
+
+*Changed 10 October 2026:* the three basic items became about 27, in five categories, so a
+"describe your day" LLM has something to map onto - still an item list, still Proposales doing
+the proposal. See [[014 Headcount first, then describe your day]].

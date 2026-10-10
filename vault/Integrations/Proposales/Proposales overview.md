@@ -125,6 +125,14 @@ One catch:
 | **Webhooks** | Proposales calls us on events | Public URL + connection powerup | Only via a tunnel |
 | **Widgets** | Our UI inside the Proposales editor | Public URL + connection powerup | Only via a tunnel |
 
+**An MCP server, for their docs only.** Found 10 October 2026: `https://docs.proposales.com/mcp`
+(their docs site, built on Mintlify) answers MCP with three tools - search the docs, query the
+docs pages and OpenAPI spec as files, and send feedback on the docs. No API key, nothing about an
+account: it can't read or write proposals. So it's a tool for whoever builds the integration
+(Claude Code, a developer's assistant), not a way to give our site's LLM knowledge - our feature
+needs the club's catalogue, which isn't in Proposales at all
+([[014 Headcount first, then describe your day]]). The docs also publish `llms.txt`.
+
 The connection powerup is enabled by Proposales customer success - see
 [Connections](https://docs.proposales.com/connections). Once deployed on Vercel the app has a
 public URL, so webhooks and widgets become reachable without a tunnel - but the powerup is

@@ -7,6 +7,8 @@ import { products as productsMock } from "./mocks/get-products";
 // öre happens at the Proposales edge.
 export const ProductSchema = z.object({
   id: z.string(),
+  /** The heading the form groups it under: "Food", "Hire and shop". */
+  category: z.string(),
   name: z.string(),
   description: z.string(),
   /** What one of it is: "per player", "per cart, all day". */

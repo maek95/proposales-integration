@@ -59,6 +59,8 @@ export default function RequestForm({
     const quantity = quantities[product.id] ?? 0;
     return { product, quantity, amountKr: quantity * product.priceKr };
   });
+  // The booking system's categories, in the order it lists them.
+  const categories = [...new Set(lines.map((line) => line.product.category))];
   const picked = lines.filter((line) => line.quantity > 0);
   const totalKr = lines.reduce((sum, line) => sum + line.amountKr, 0);
   const canSend = picked.length > 0 && !serviceError && !isSending;
@@ -175,24 +177,33 @@ export default function RequestForm({
               The club has no group-day products online right now.
             </p>
           ) : (
-            <div className="flex flex-col gap-2.5">
-              {lines.map(({ product, quantity }) => (
-                <div
-                  key={product.id}
-                  className="flex flex-wrap items-center gap-x-5 gap-y-3 rounded-card bg-panel px-4.5 py-4"
-                >
-                  <div className="min-w-0 flex-[1_1_200px]">
-                    <div className="text-[17px] font-bold">{product.name}</div>
-                    <div className="text-sm text-subtle">
-                      {formatKr(product.priceKr)} {product.unit}
-                    </div>
+            <div className="flex flex-col gap-6">
+              {categories.map((category) => (
+                <div key={category}>
+                  <h3 className="mb-2.5 text-sm font-semibold text-muted">{category}</h3>
+                  <div className="flex flex-col gap-2.5">
+                    {lines
+                      .filter((line) => line.product.category === category)
+                      .map(({ product, quantity }) => (
+                        <div
+                          key={product.id}
+                          className="flex flex-wrap items-center gap-x-5 gap-y-3 rounded-card bg-panel px-4.5 py-4"
+                        >
+                          <div className="min-w-0 flex-[1_1_200px]">
+                            <div className="text-[17px] font-bold">{product.name}</div>
+                            <div className="text-sm text-subtle">
+                              {product.priceKr === 0 ? "Included" : `${formatKr(product.priceKr)} ${product.unit}`}
+                            </div>
+                          </div>
+                          <Stepper
+                            value={quantity}
+                            max={MAX_QUANTITY_PER_PRODUCT}
+                            label={product.name}
+                            onStep={(by) => step(product.id, by)}
+                          />
+                        </div>
+                      ))}
                   </div>
-                  <Stepper
-                    value={quantity}
-                    max={MAX_QUANTITY_PER_PRODUCT}
-                    label={product.name}
-                    onStep={(by) => step(product.id, by)}
-                  />
                 </div>
               ))}
             </div>
