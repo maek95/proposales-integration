@@ -44,12 +44,14 @@ integrations, **FE** pages and components, **INT** real integration checks, **SH
 
 ## In progress
 
-- [[SHIP-3 Decide on an LLM]] - the brief's bonus; options and a recommendation in the ticket.
+Nothing right now.
 
 ## Todo
 
 In order - the top one is next.
 
+- [[FE-3 Headcount first]] - a required "How many are you?" before the rest of the form.
+- [[BE-7 Describe your day fills in the form]] - the LLM feature, per decision 014.
 - [[BE-5 Prices and quantities in the draft]] - the first real draft showed no prices.
 - [[BE-4 Daily cap on drafts]] - at most N drafts a day reach the account, whoever sends. Can wait, per the user.
 - [[ACC-1 Look at the Buyer Portal]] - the user, in the Proposales app.
@@ -59,6 +61,7 @@ In order - the top one is next.
 
 ## Done
 
+- [[SHIP-3 Decide on an LLM, and a bigger catalogue]] - 10 October 2026
 - [[SHIP-1 Deploy on Vercel]] - 10 October 2026
 - [[BE-3 Send to Proposales through our API, code organised by what it does]] - 10 October 2026
 - [[BE-2 createProposal, with its fixture]] - 9 October 2026

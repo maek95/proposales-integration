@@ -45,3 +45,4 @@ link the decision that replaced it.
 - [[011 The catalogue comes from a mocked golf booking system]] - no database; products and prices from a mock-only golf system client.
 - [[012 The site's look is Fairway modern]] - bold grotesk, rounded cards, a dark summary panel with the total and Send; spec in [[Fairway modern]].
 - [[013 Code is organised by the direction of the call]] - `api/` our backend (each route the whole request), `_clients/` other systems, `_lib/` plain helpers.
+- [[014 Headcount first, then describe your day]] - the LLM decision: ~27 products, a required headcount, then an optional text box an LLM turns into quantities. No embeddings.
