@@ -44,13 +44,12 @@ integrations, **FE** pages and components, **INT** real integration checks, **SH
 
 ## In progress
 
-- [[FE-3 The form asks how many you are before anything else]] - a required "How many are you?" before the rest of the form. Built, waiting for a click-through.
+- [[BE-7 An LLM fills in the form from the visitor's description of the day]] - the LLM feature, per decision 014.
 
 ## Todo
 
 In order - the top one is next.
 
-- [[BE-7 An LLM fills in the form from the visitor's description of the day]] - the LLM feature, per decision 014.
 - [[BE-5 Every line in the Proposales draft shows its price and quantity]] - the first real draft showed no prices.
 - [[BE-4 A daily cap on how many drafts the website can create in Proposales]] - at most N drafts a day reach the account, whoever sends. Can wait, per the user.
 - [[ACC-1 Check whether Proposales' Buyer Portal already does what our form does]] - the user, in the Proposales app.
@@ -60,6 +59,7 @@ In order - the top one is next.
 
 ## Done
 
+- [[FE-3 The form asks how many you are before anything else]] - 10 October 2026
 - [[SHIP-3 Decide on an LLM, and a bigger catalogue]] - 10 October 2026
 - [[SHIP-1 Deploy on Vercel]] - 10 October 2026
 - [[BE-3 Send to Proposales through our API, code organised by what it does]] - 10 October 2026

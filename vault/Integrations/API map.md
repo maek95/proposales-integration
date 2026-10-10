@@ -19,6 +19,7 @@ The folders follow the direction of the call ([[013 Code is organised by the dir
 |---|---|---|---|---|
 | Proposales | `GET /v3/companies` | `getCompanies()` - `app/_clients/proposales/get-companies.ts` | nothing in the app - kept for checking the configured company | `PROPOSALES_MOCK` |
 | Proposales | `POST /v3/proposals` | `postProposal()` - `app/_clients/proposales/post-proposal.ts` | the Send route | `PROPOSALES_MOCK` |
+| The model (Vercel AI Gateway) | `openai/gpt-4.1-mini`, through the AI SDK's `generateText` | `postSuggestedPicks()` - `app/_clients/ai/post-suggested-picks.ts` | the suggest route | `AI_MOCK` |
 | Golf booking system | none connected - fails as not configured | `getProducts()` - `app/_clients/golf-booking/get-products.ts` | `/group-days` page, the Send route | `GOLF_BOOKING_MOCK` (must be `true` for prices) |
 
 ## Inbound - the browser calls us
@@ -26,6 +27,7 @@ The folders follow the direction of the call ([[013 Code is organised by the dir
 | URL / action | Code | Calls | Used by |
 |---|---|---|---|
 | `POST /api/group-days/requests` - Send on the group-days form | `app/api/group-days/requests/route.ts` | `getProducts()` to check the picks, then `postProposal()` once | `app/group-days/_components/request-form.tsx` |
+| `POST /api/group-days/suggest` - Fill in the form, under *Describe your day* | `app/api/group-days/suggest/route.ts` | `getProducts()` for the catalogue, then `postSuggestedPicks()` once - nothing to Proposales | `app/group-days/_components/describe-day.tsx` |
 
 Pages that load data on the server, with no URL of their own: `/group-days`
 (`request-section.tsx` → `getProducts()`).

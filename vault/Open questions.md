@@ -3,15 +3,6 @@
 Things discussed but not settled, with the options and any recommendation. When one is settled
 it becomes a note in [[Decisions]], and its entry here links there and moves to *Settled*.
 
-## How do we pay for the LLM?
-
-Raised 6 October 2026. Background in [[Vercel AI SDK overview]].
-
-Proposed 6 October 2026: the **AI Gateway free tier**. No cost, fits "host it on Vercel", and the
-worst case for a public demo is a `429` rather than a bill. Alternative: a provider key directly,
-which bills per token from the first call. Which model is still open - it depends on what the
-free tier offers when we build it.
-
 ## When is the deadline?
 
 Raised 6 October 2026. The email says "Monday next week" - 2026-10-12 if it arrived the week of
@@ -63,7 +54,14 @@ spam shows up.
 - **Revised proposal:** honeypot + site-wide daily cap (now [[BE-4 A daily cap on how many drafts the website can create in Proposales|BE-4]]) counted in Proposales (no new service);
   a per-IP limit through Vercel's firewall or Upstash on top; Turnstile if spam shows up.
 
+*Added 10 October 2026, building BE-7:* the per-IP limit is a Vercel firewall rule on
+`/api/group-days/` - Send and *describe your day* both - see [[015 The model, the SDK and the limits behind describe your day]]. Honeypot and the daily cap
+still open.
+
 ## Settled
+
+- **How do we pay for the LLM?** Settled 10 October 2026 - the AI Gateway's free tier, with
+  `openai/gpt-4.1-mini`; proposed 6 October. See [[015 The model, the SDK and the limits behind describe your day]].
 
 - **Which look for the club's site?** Settled 9 October 2026 - B, Fairway modern. See
   [[012 The site's look is Fairway modern]].
