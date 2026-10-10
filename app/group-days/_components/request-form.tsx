@@ -5,12 +5,14 @@ import { club } from "@/app/_content/club";
 import { formatKr, formatPeople } from "@/app/_utils/formatters";
 import type { Product } from "@/app/_clients/golf-booking";
 import type { FieldErrors, GroupDayRequest, SendResult } from "@/app/api/group-days/requests/schema";
-import { MAX_HEADCOUNT, MAX_QUANTITY_PER_PRODUCT } from "@/app/api/group-days/requests/limits";
+import type { Suggestion } from "@/app/api/group-days/suggest/schema";
+import { MAX_HEADCOUNT, MAX_QUANTITY_PER_PRODUCT } from "@/app/api/group-days/limits";
 import Button from "@/app/_components/ui/button";
 import ErrorNotice from "@/app/_components/ui/error-notice";
 import Field from "@/app/_components/ui/field";
 import SelectField from "@/app/_components/ui/select-field";
 import Stepper from "@/app/_components/ui/stepper";
+import DescribeDay from "./describe-day";
 
 type Details = Pick<GroupDayRequest, "date" | "company" | "name" | "email">;
 
@@ -30,6 +32,8 @@ async function postRequest(request: GroupDayRequest): Promise<SendResult> {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(request),
     });
+    // The firewall's per-visitor limit answers before our route, without our JSON.
+    if (response.status === 429) return { ok: false, serviceError: "You've asked a lot in a short while - wait a minute." };
     return (await response.json()) as SendResult;
   } catch {
     return { ok: false, serviceError: "We couldn't reach the club's website." };
@@ -57,6 +61,8 @@ export default function RequestForm({
 }) {
   const [headcount, setHeadcount] = useState<number | null>(null);
   const [quantities, setQuantities] = useState<Record<string, number>>({});
+  // Lines set from "describe your day" that the visitor hasn't touched since.
+  const [suggested, setSuggested] = useState<Set<string>>(new Set());
   const [details, setDetails] = useState<Details>(emptyDetails);
   const [fieldErrors, setFieldErrors] = useState<FieldErrors>({});
   const [serviceError, setServiceError] = useState<string | null>(null);
@@ -81,6 +87,18 @@ export default function RequestForm({
       const next = Math.min(MAX_QUANTITY_PER_PRODUCT, Math.max(0, (current[productId] ?? 0) + by));
       return { ...current, [productId]: next };
     });
+    setSuggested((current) => {
+      const next = new Set(current);
+      next.delete(productId);
+      return next;
+    });
+    setFieldErrors((current) => without(current, "items"));
+  }
+
+  /** The suggestion replaces every stepper - it describes the whole day. */
+  function applySuggestion({ items }: Suggestion) {
+    setQuantities(Object.fromEntries(items.map((item) => [item.productId, item.quantity])));
+    setSuggested(new Set(items.map((item) => item.productId)));
     setFieldErrors((current) => without(current, "items"));
   }
 
@@ -115,6 +133,7 @@ export default function RequestForm({
   function startOver() {
     setHeadcount(null);
     setQuantities({});
+    setSuggested(new Set());
     setDetails(emptyDetails);
     setFieldErrors({});
     setSentSummary(null);
@@ -210,8 +229,12 @@ export default function RequestForm({
 
         {showRest && (
           <>
+            {headcount !== null && products !== null && products.length > 0 && (
+              <DescribeDay headcount={headcount} onSuggestion={applySuggestion} />
+            )}
+
             <fieldset aria-describedby={fieldErrors.items ? "items-error" : undefined}>
-              <legend className="mb-3.5 text-lg font-bold">2 · What the day needs</legend>
+              <legend className="mb-3.5 text-lg font-bold">3 · What the day needs</legend>
               {products === null ? (
                 <ErrorNotice title="Prices aren't available right now.">
                   {productsError} Group requests are paused - please try again later.
@@ -234,7 +257,14 @@ export default function RequestForm({
                               className="flex flex-wrap items-center gap-x-5 gap-y-3 rounded-card bg-panel px-4.5 py-4"
                             >
                               <div className="min-w-0 flex-[1_1_200px]">
-                                <div className="text-[17px] font-bold">{product.name}</div>
+                                <div className="text-[17px] font-bold">
+                                  {product.name}
+                                  {suggested.has(product.id) && (
+                                    <span className="ml-2 align-middle text-xs font-semibold text-fairway">
+                                      from your description
+                                    </span>
+                                  )}
+                                </div>
                                 <div className="text-sm text-subtle">
                                   {product.priceKr === 0 ? "Included" : `${formatKr(product.priceKr)} ${product.unit}`}
                                 </div>
@@ -260,7 +290,7 @@ export default function RequestForm({
             </fieldset>
 
             <fieldset>
-              <legend className="mb-3.5 text-lg font-bold">3 · When and who</legend>
+              <legend className="mb-3.5 text-lg font-bold">4 · When and who</legend>
               <div className="flex flex-wrap gap-4">
                 <Field
                   label="Preferred date"
@@ -302,7 +332,13 @@ export default function RequestForm({
         )}
       </div>
 
-      <aside aria-label="Your day" className="min-w-0 flex-[1_1_300px] rounded-panel bg-ink p-7 text-white">
+      {/* Sticky, so the total and Send stay in view down a long form. Once it wraps under the form
+          on a narrow screen, it's last in the row and simply scrolls with the page. Never taller than
+          the screen, so a long list of picks can't push Send out of sight - the panel scrolls instead. */}
+      <aside
+        aria-label="Your day"
+        className="sticky top-6 max-h-[calc(100dvh-3rem)] min-w-0 flex-[1_1_300px] overflow-y-auto rounded-panel bg-ink p-7 text-white"
+      >
         <div className="mb-4 text-sm font-semibold text-on-dark-muted">
           Your day{headcount !== null && ` · ${formatPeople(headcount)}`}
         </div>

@@ -39,8 +39,9 @@ Non-UI code is organised by the direction of the call: `app/api/` is our backend
   `requestJson` (timeout, validation, logging), the mock switch, `attempt` and `errorResponse`.
 - `app/_clients/<service>/` - **outbound**, one folder per external API we call: `client.ts` (base URL, auth,
   mocks), one file per call named for what it does (`get-products.ts`, `post-proposal.ts`) with
-  its schemas, types and helper, `index.ts` re-exporting them, `mocks/` (one fixture per call). Currently `proposales/` and
-  `golf-booking/` (the club's booking system - mocked, its fixtures are the data).
+  its schemas, types and helper, `index.ts` re-exporting them, `mocks/` (one fixture per call). Currently `proposales/`,
+  `golf-booking/` (the club's booking system - mocked, its fixtures are the data) and `ai/` (the
+  model behind "describe your day", through the Vercel AI Gateway).
 - `app/_content/` - site content, no logic: the club's details (`club.ts`), the photos.
 - `app/_utils/` - small pure helpers, safe on either side: `formatters.ts` (money, dates, counts).
 - `app/globals.css` - Tailwind `@theme` tokens.
@@ -56,6 +57,7 @@ Non-UI code is organised by the direction of the call: `app/api/` is our backend
 npm run dev      # local dev server (PROPOSALES_MOCK=true npm run dev for fixtures, no key)
                  # GOLF_BOOKING_MOCK=true is needed for prices - no real booking system is
                  # connected; =error shows the "prices aren't available" state
+                 # AI_MOCK=true gives "describe your day" fixed picks, no model call
 npm run lint
 npm run build    # must pass without .env - Proposales calls only happen at request time
 ```

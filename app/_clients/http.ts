@@ -61,8 +61,9 @@ export class ExternalApiError extends Error {
   }
 }
 
-// Every ExternalApiError is logged once, where it's created - never silent.
-function fail(err: ExternalApiError) {
+// Every ExternalApiError is logged once, where it's created - never silent. Exported for a
+// client whose SDK makes the request itself (app/_clients/ai/), so it fails the same way.
+export function fail(err: ExternalApiError) {
   const status = err.status ? ` ${err.status}` : "";
   console.error(`[${err.service}] ${err.kind}${status}: ${err.message}`, err.cause ?? "");
   return err;

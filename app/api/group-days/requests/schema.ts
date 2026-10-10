@@ -1,6 +1,6 @@
 import { z } from "zod";
 import { todayInSweden } from "@/app/_utils/formatters";
-import { MAX_HEADCOUNT, MAX_QUANTITY_PER_PRODUCT } from "./limits";
+import { MAX_HEADCOUNT, MAX_QUANTITY_PER_PRODUCT } from "../limits";
 
 // The contract of POST /api/group-days/requests (route.ts, next to this file): what the form
 // sends and what it gets back. Shared by the form (types) and the route (validation) -

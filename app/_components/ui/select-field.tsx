@@ -17,7 +17,7 @@ export default function SelectField({
         name={name}
         aria-invalid={error ? true : undefined}
         aria-describedby={error ? errorId : undefined}
-        className={`${fieldControl(error)} cursor-pointer disabled:cursor-not-allowed disabled:opacity-60`}
+        className={`h-12 ${fieldControl(error)} cursor-pointer disabled:cursor-not-allowed disabled:opacity-60`}
         {...select}
       >
         {children}

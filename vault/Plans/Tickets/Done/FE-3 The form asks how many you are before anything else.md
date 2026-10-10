@@ -1,6 +1,6 @@
 # FE-3 The form asks how many you are before anything else
 
-**Status:** In progress - built 10 October 2026, waiting for a click-through in the browser.
+**Status:** Done 10 October 2026 - merged into `main` by the user.
 **Blocked by:** nothing.
 **Done when:** the form starts with a required "How many are you?" select, the rest of the
 form appears once it's set, and the headcount reaches the draft.

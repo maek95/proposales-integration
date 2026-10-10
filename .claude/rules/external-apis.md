@@ -124,6 +124,10 @@ cost money per call. A missing rate limit in the docs means unknown, not unlimit
 - **Public endpoints that cost money are capped.** Once the app is live on Vercel anyone can
   hit it - an LLM call needs a max output length and a limit on how often one visitor can
   trigger it.
+- **An LLM call picks a tier and states its thinking.** Models live in one place, the tiers in
+  `app/_clients/ai/client.ts` (`low`, `high`), named by what a call needs - a new call picks an
+  existing tier, never a model id of its own. `thinking: "on" | "off"` is passed every time,
+  never defaulted: thinking tokens bill at the output rate and add latency.
 
 ### Mock data
 

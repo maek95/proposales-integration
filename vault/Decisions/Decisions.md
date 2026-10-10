@@ -46,3 +46,4 @@ link the decision that replaced it.
 - [[012 The site's look is Fairway modern]] - bold grotesk, rounded cards, a dark summary panel with the total and Send; spec in [[Fairway modern]].
 - [[013 Code is organised by the direction of the call]] - `api/` our backend (each route the whole request), `_clients/` other systems, `_lib/` plain helpers.
 - [[014 Headcount first, then describe your day]] - the LLM decision: ~27 products, a required headcount, then an optional text box an LLM turns into quantities. No embeddings.
+- [[015 The model, the SDK and the limits behind describe your day]] - `openai/gpt-4.1-mini` on the AI Gateway's free tier, `ai` 6 (Node 20), a firewall rule per visitor, the answer held to a schema of our ids.

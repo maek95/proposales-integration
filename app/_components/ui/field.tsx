@@ -16,7 +16,7 @@ export default function Field({
         name={name}
         aria-invalid={error ? true : undefined}
         aria-describedby={error ? errorId : undefined}
-        className={fieldControl(error)}
+        className={`h-12 ${fieldControl(error)}`}
         {...input}
       />
       {error && (
