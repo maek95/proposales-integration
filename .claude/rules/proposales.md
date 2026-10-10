@@ -8,13 +8,13 @@ The general rules are in `external-apis.md`. This file only holds what's differe
 Proposales. Background - what the API offers, its limits - is in
 `vault/Integrations/Proposales/Proposales overview.md`.
 
-- **The client** is `app/_lib/proposales/`; the key is `PROPOSALES_API_KEY`; the mock switch is
+- **The client** is `app/_clients/proposales/`; the key is `PROPOSALES_API_KEY`; the mock switch is
   `PROPOSALES_MOCK`.
 - **The spec:** https://docs.proposales.com/openapi.json. It isn't always right about nullability -
   fields it marks required have come back `null` (company `timezone`, 6 October 2026). If we
   use such a field, the schema marks it `.nullable()` - otherwise validation fails loudly.
 - **Money is in the smallest currency unit** - öre, cents. 650 kr is `65000`. Convert at the edge
-  of `app/_lib/proposales/`, so the rest of the app works in whole currency units, and name
+  of `app/_clients/proposales/`, so the rest of the app works in whole currency units, and name
   fields so the unit is obvious.
 - **The inbox token is a secret in disguise.** A company object includes `inbox_token`, and the
   inbox endpoint creates requests for proposal with that token alone - no API key. Never pass it

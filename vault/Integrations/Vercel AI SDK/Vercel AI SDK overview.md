@@ -24,7 +24,7 @@ relying on them.
 - On the free Gateway tier, the worst case for a public demo is a `429`, not a bill. Our rules
   already require handling `429` (`.claude/rules/external-apis.md`), so the feature shows "busy,
   try again" instead of breaking.
-- It would follow the same pattern as Proposales: `app/_lib/ai/` with a server-only client and an
+- It would follow the same pattern as Proposales: `app/_clients/ai/` with a server-only client and an
   `AI_MOCK` switch, so UI work doesn't spend credits.
 - Structured output uses zod schemas, which the app already uses for validating API responses
   (see [[004 One shared layer for external APIs]]).

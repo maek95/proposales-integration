@@ -18,7 +18,7 @@ green-fee pricing and is now bookable through Min Golf (see [[Golf clubs' group 
 - **A hosted database** - ruled out by the user: nothing to host.
 - **A hosted key-value store** (e.g. Vercel Edge Config) - no database, editable without a
   deploy, but one more service for a demo that doesn't need runtime edits.
-- **A mocked golf booking system** - a client in `app/_lib/<service>/` like the Proposales one,
+- **A mocked golf booking system** - a client in `app/_clients/<service>/` like the Proposales one,
   serving products and prices from its fixtures only.
 
 ## Decision
@@ -28,6 +28,13 @@ A mocked golf booking system. It sits behind the same external-API pattern
 only ever serves its fixtures, since there's no real system behind it. The fixtures are the
 storage: products, units and prices, in the repo, no hosting. A fictional, generic name - not
 named after or imitating Min Golf or Sweetspot.
+
+*Changed 10 October 2026, from the user:* the client no longer serves its fixtures no matter
+what. Whether a call reached a real API or mock data must always be explicit, never a fallback.
+The fixtures are served only with `GOLF_BOOKING_MOCK=true`; with it off, the client tries the
+real booking system, finds none connected, and fails as `not-configured` - logged, and shown as
+"prices aren't available". So the switch is on wherever the site should work, Vercel included,
+until a real system is connected.
 
 ## Consequences
 

@@ -1,7 +1,7 @@
 import "server-only";
 import { z } from "zod";
 import { envelope, mocks, proposales } from "./client";
-import { companies as companiesMock } from "./mocks/companies";
+import { companies as companiesMock } from "./mocks/get-companies";
 
 // Only the fields we use - zod strips the rest, including the company's inbox token.
 export const CompanySchema = z.object({
@@ -11,7 +11,7 @@ export const CompanySchema = z.object({
 export type Company = z.infer<typeof CompanySchema>;
 
 /** GET /v3/companies - the companies the API key's user belongs to. */
-export async function listCompanies(): Promise<Company[]> {
+export async function getCompanies(): Promise<Company[]> {
   const mocked = mocks.serve(companiesMock);
   if (mocked) return mocked;
 

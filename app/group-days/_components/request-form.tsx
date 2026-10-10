@@ -1,11 +1,11 @@
 "use client";
 
 import { useState, useTransition } from "react";
-import { club } from "@/app/_lib/club";
-import { formatKr } from "@/app/_lib/format";
-import type { Product } from "@/app/_lib/golf-booking";
-import { MAX_QUANTITY, type FieldErrors, type GroupDayRequest } from "@/app/_lib/group-days/request";
-import { sendGroupDayRequest } from "@/app/_lib/group-days/send-request";
+import { club } from "@/app/_content/club";
+import { formatKr } from "@/app/_utils/formatters";
+import type { Product } from "@/app/_clients/golf-booking";
+import type { FieldErrors, GroupDayRequest, SendResult } from "@/app/api/group-days/requests/schema";
+import { MAX_QUANTITY_PER_PRODUCT } from "@/app/api/group-days/requests/limits";
 import Button from "@/app/_components/ui/button";
 import ErrorNotice from "@/app/_components/ui/error-notice";
 import Field from "@/app/_components/ui/field";
@@ -14,6 +14,20 @@ import Stepper from "@/app/_components/ui/stepper";
 type Details = Pick<GroupDayRequest, "date" | "company" | "name" | "email">;
 
 const emptyDetails: Details = { date: "", company: "", name: "", email: "" };
+
+/** POST /api/group-days/requests - our own API; the server talks to Proposales. */
+async function postRequest(request: GroupDayRequest): Promise<SendResult> {
+  try {
+    const response = await fetch("/api/group-days/requests", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(request),
+    });
+    return (await response.json()) as SendResult;
+  } catch {
+    return { ok: false, serviceError: "We couldn't reach the club's website." };
+  }
+}
 
 /** A field's error goes away as soon as the visitor changes that field. */
 function without(errors: FieldErrors, field: keyof FieldErrors): FieldErrors {
@@ -24,7 +38,7 @@ function without(errors: FieldErrors, field: keyof FieldErrors): FieldErrors {
 
 /**
  * The group-days form and the states that replace it: sending and sent. Nothing is called while
- * the visitor picks and types - one Server Action call per press of Send.
+ * the visitor picks and types - one POST to /api/group-days/requests per press of Send.
  */
 export default function RequestForm({
   products,
@@ -49,8 +63,11 @@ export default function RequestForm({
   const totalKr = lines.reduce((sum, line) => sum + line.amountKr, 0);
   const canSend = picked.length > 0 && !serviceError && !isSending;
 
-  function setQuantity(productId: string, quantity: number) {
-    setQuantities((current) => ({ ...current, [productId]: quantity }));
+  function step(productId: string, by: -1 | 1) {
+    setQuantities((current) => {
+      const next = Math.min(MAX_QUANTITY_PER_PRODUCT, Math.max(0, (current[productId] ?? 0) + by));
+      return { ...current, [productId]: next };
+    });
     setFieldErrors((current) => without(current, "items"));
   }
 
@@ -63,7 +80,7 @@ export default function RequestForm({
     setServiceError(null);
     startSending(async () => {
       const items = lines.map(({ product, quantity }) => ({ productId: product.id, quantity }));
-      const result = await sendGroupDayRequest({ ...details, items });
+      const result = await postRequest({ ...details, items });
       if (result.ok) {
         setSentSummary(
           [...picked.map((line) => `${line.quantity} × ${line.product.name}`), `${formatKr(totalKr)} indicative`].join(" · "),
@@ -172,9 +189,9 @@ export default function RequestForm({
                   </div>
                   <Stepper
                     value={quantity}
-                    max={MAX_QUANTITY}
+                    max={MAX_QUANTITY_PER_PRODUCT}
                     label={product.name}
-                    onChange={(value) => setQuantity(product.id, value)}
+                    onStep={(by) => step(product.id, by)}
                   />
                 </div>
               ))}

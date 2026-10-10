@@ -1,14 +1,13 @@
 import "server-only";
 import { z } from "zod";
-import { mocks, proposales } from "./client";
-import { createdProposal as createdProposalMock } from "./mocks/proposals";
+import { account, mocks, proposales, type Account } from "./client";
+import { createdProposal as postedProposalMock } from "./mocks/post-proposal";
 
 // Proposales' format stays in this file: callers describe a proposal in our own terms (whole
-// kronor, one name field), and createProposal builds the request the API expects.
+// kronor, one name field), and postProposal builds the request the API expects.
 
-/** A new draft proposal, in our own terms. */
+/** A new draft proposal, in our own terms. Which company it goes to is the account's business. */
 export type NewProposal = {
-  companyId: number;
   /** Proposales' language code, e.g. "en". */
   language: string;
   title: string;
@@ -16,8 +15,6 @@ export type NewProposal = {
   description: string;
   recipient: { name: string; email: string; companyName: string };
   items: NewProposalItem[];
-  /** The template the draft is made from, if the company has one. */
-  templateUuid?: string;
   /** Our own metadata on the proposal - how drafts from the website are found again. */
   data: Record<string, string>;
 };
@@ -67,10 +64,10 @@ export const CreatedProposalSchema = z.object({
 export type CreatedProposal = z.infer<typeof CreatedProposalSchema>;
 
 /** POST /v3/proposals - creates a draft; someone at the club sends it from Proposales. */
-export async function createProposal(proposal: NewProposal): Promise<CreatedProposal> {
-  const body = CreateProposalBodySchema.parse(toRequestBody(proposal));
+export async function postProposal(proposal: NewProposal): Promise<CreatedProposal> {
+  const body = CreateProposalBodySchema.parse(toRequestBody(proposal, account()));
 
-  const mocked = mocks.serve(createdProposalMock);
+  const mocked = mocks.serve(postedProposalMock);
   if (mocked) return mocked;
 
   const { proposal: created } = await proposales(
@@ -81,10 +78,10 @@ export async function createProposal(proposal: NewProposal): Promise<CreatedProp
   return created;
 }
 
-function toRequestBody(proposal: NewProposal): CreateProposalBody {
+function toRequestBody(proposal: NewProposal, { companyId, templateUuid }: Account): CreateProposalBody {
   const [firstName, ...rest] = proposal.recipient.name.trim().split(/\s+/);
   return {
-    company_id: proposal.companyId,
+    company_id: companyId,
     language: proposal.language,
     title_md: proposal.title,
     description_md: proposal.description,
@@ -102,7 +99,7 @@ function toRequestBody(proposal: NewProposal): CreateProposalBody {
       currency: "SEK",
       unit_value_without_discount_with_tax: Math.round(item.unitPriceKr * 100),
     })),
-    tracking: proposal.templateUuid ? { created_from_template: proposal.templateUuid } : undefined,
+    tracking: templateUuid ? { created_from_template: templateUuid } : undefined,
     data: proposal.data,
   };
 }

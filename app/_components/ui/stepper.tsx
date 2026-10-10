@@ -1,16 +1,17 @@
-/** A pill stepper: − quantity +. Labels name what's counted ("green fees"). */
+/** A pill stepper: − quantity +. Calls `onStep` with -1 or +1; the owner applies it. */
 export default function Stepper({
   value,
   min = 0,
   max,
   label,
-  onChange,
+  onStep,
 }: {
   value: number;
   min?: number;
   max: number;
   label: string;
-  onChange: (value: number) => void;
+  /** Applied to the current value, so quick clicks don't use a stale one. */
+  onStep: (step: -1 | 1) => void;
 }) {
   const button =
     "grid size-11 place-items-center rounded-full text-xl cursor-pointer disabled:cursor-not-allowed disabled:opacity-40 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-fairway";
@@ -20,7 +21,7 @@ export default function Stepper({
         type="button"
         aria-label={`Fewer: ${label}`}
         disabled={value <= min}
-        onClick={() => onChange(value - 1)}
+        onClick={() => onStep(-1)}
         className={`${button} bg-stepper text-ink`}
       >
         −
@@ -32,7 +33,7 @@ export default function Stepper({
         type="button"
         aria-label={`More: ${label}`}
         disabled={value >= max}
-        onClick={() => onChange(value + 1)}
+        onClick={() => onStep(1)}
         className={`${button} bg-fairway text-white`}
       >
         +

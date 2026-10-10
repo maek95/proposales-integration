@@ -25,10 +25,10 @@ read as if the whole site were the form.
   while building* in [[Fairway modern]].
 - **Data** - products and prices from the mocked golf booking system
   ([[BE-1 The mocked golf booking system|BE-1]]). Send goes to a Server Action,
-  `app/_lib/group-days/send-request.ts`, that only validates for now - nothing reaches
+  `app/_server/group-days/send-request.ts`, that only validates for now - nothing reaches
   Proposales yet.
-- **The club** - fictional, Tallmora GK, its details in `app/_lib/club.ts`; stock photos from
-  Unsplash, listed in `app/_lib/photos.ts`.
+- **The club** - fictional, Tallmora GK, its details in `app/_content/club.ts`; stock photos from
+  Unsplash, listed in `app/_content/photos.ts`.
 - **The code** - each route keeps its components in a private `_components/`
   (`app/club/_components/`); `app/_components/` holds only what's shared (`layout/`, `ui/`).
   One component per file, as `export default function`. Conventions in

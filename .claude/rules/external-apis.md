@@ -9,28 +9,39 @@ own rule file (`proposales.md`).
 
 ### One client per service
 
-- **The shared layer is `app/_lib/external/`** - one error type (`ExternalApiError`), one
+- **The shared layer is `app/_clients/http.ts`** - one error type (`ExternalApiError`), one
   request function (`requestJson`), the mock switch, and the helpers features use to fail safely
   (`attempt`, `errorResponse`). Every service builds on it; no service re-implements timeouts,
   error mapping, validation or logging.
-- **A folder per service** in `app/_lib/<service>/`, split by concern so anything can be found
+- **A folder per service** in `app/_clients/<service>/`, split by concern so anything can be found
   from its name:
   - `client.ts` - base URL, auth, the mock switch, response envelope helpers. Internal to the
     folder.
-  - `<resource>.ts` - one file per API resource (`companies.ts`, `proposals.ts`): its zod
-    schemas, the inferred types, and its endpoint helpers, together.
-  - `index.ts` - the public surface: `export * from "./<resource>"` per resource, nothing else.
-  - `mocks/<resource>.ts` - fixtures.
-  Pages and routes import from `@/app/_lib/<service>`, never from `client.ts`, and never call the
+  - `<method>-<thing>.ts` - **one file per call, named for what it does** (`get-products.ts`,
+    `post-proposal.ts`), with a helper of the same name (`getProducts`, `postProposal`), its
+    zod schemas and the inferred types.
+  - `index.ts` - the public surface: `export * from "./<method>-<thing>"` per call, nothing else.
+  - `mocks/<method>-<thing>.ts` - the fixture for that call.
+  Pages and routes import from `@/app/_clients/<service>`, never from `client.ts`, and never call the
   service's URL themselves.
-- **`_lib/<service>/` consumes, `app/api/` exposes.** Calling a third-party API lives in
-  `_lib/`. `app/api/` holds only our own Route Handlers - the URLs the browser calls - which use
-  the `_lib` helpers.
+- **Every call is in the API map**, `vault/Integrations/API map.md` - outbound and inbound. Adding,
+  removing or rerouting a call updates it in the same change.
+- **Two folders, two directions: `app/api/` is our backend, `app/_clients/` is other systems.**
+  - `app/api/` - **inbound**: our own Route Handlers, the URLs the browser calls. A route is the
+    whole backend for its request, readable top to bottom: validate the input, check it against
+    our data (later a login, our own database, a cap), then call out, then a status code.
+  - `app/_clients/` - **outbound**: one folder per other system's API, plus the shared layer.
+  - Next to a route, `schema.ts` - its contract: what the browser sends and gets back, shared
+    with the form (`app/api/group-days/requests/schema.ts`).
+- **The browser reaches our backend only through `app/api/`** - no Server Actions - so every
+  entry point is a visible route. Status codes: `201`/`200`, `400` for the visitor's input,
+  `502` when a service failed. Logic two routes share goes in a shared helper - not copied,
+  and not in a layer of its own until there's a second route.
 - **Server only.** Each client keeps `import "server-only"`. Never import one from a
-  `"use client"` file - client components call a Route Handler in `app/api/<service>/` or a
-  Server Action.
-- **Server Components first.** Call the helpers directly in Server Components. Add a Route
-  Handler only when a client component needs data after an interaction.
+  `"use client"` file - client components call a Route Handler in `app/api/`.
+- **Server Components first.** A page's data on load comes from the helpers, called directly in
+  its Server Component - never by fetching our own `app/api/` from the server. A Route Handler
+  is for what the browser does after the page has loaded: a form submit, data on interaction.
 
 ### Secrets
 
@@ -117,10 +128,15 @@ cost money per call. A missing rate limit in the docs means unknown, not unlimit
 ### Mock data
 
 - **Every service has a mock switch**, `mockSwitch(SERVICE, "<SERVICE>_MOCK")`: `=true` makes
-  its helpers return fixtures from `app/_lib/<service>/mocks/`; `=error` makes them fail as
-  `unreachable`, for testing error states. A helper is `mocks.serve(fixture) ?? requestJson(...)`.
+  its helpers return fixtures from `app/_clients/<service>/mocks/`; `=error` makes them fail as
+  `unreachable`, for testing error states. A helper checks `mocks.serve(fixture)` first and
+  returns it if set, then makes the real call - two explicit branches.
   Mocks still call `connection()`, so rendering behaves like a real call. Off by default, so a
   misconfigured deploy fails loudly rather than showing fake data.
+- **Never fall back to mock data.** It must always be clear whether a call reached the real API
+  or a fixture: fixtures are served only with the switch on. A service with no real API
+  connected yet (the golf booking system) fails with `notConnected()` - a logged
+  `not-configured` error - when its switch is off.
 - **Build UI against mocks.** Use them while iterating and for trying write flows; switch back
   for one final real check.
 - **One fixture file per endpoint**, typed with the type inferred from the endpoint's schema,

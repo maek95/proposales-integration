@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
-import { club } from "./_lib/club";
-import { photos } from "./_lib/photos";
+import { club } from "./_content/club";
+import { photos } from "./_content/photos";
 import pill from "./_components/ui/pill";
 
 // The landing page: the course, and the two ways in - the club, or a group day.

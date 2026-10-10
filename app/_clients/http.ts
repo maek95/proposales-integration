@@ -5,7 +5,7 @@ import { z } from "zod";
 
 /**
  * The shared layer every external API client builds on: one error type, one request
- * function, one mock switch. Service clients in app/_lib/<service>/ only add their base
+ * function, one mock switch. Service clients in app/_clients/<service>/ only add their base
  * URL, auth and schemas.
  */
 
@@ -75,6 +75,16 @@ export function requireEnv(service: string, name: string) {
   return value;
 }
 
+/**
+ * For a service whose real API isn't connected yet: fails as `not-configured`, logged like any
+ * failure. Its fixtures are only served with the mock switch on - never as a fallback.
+ */
+export function notConnected(service: string) {
+  return fail(
+    new ExternalApiError(service, "not-configured", "no real API is connected - set its mock switch to use fixtures"),
+  );
+}
+
 export type RequestOptions = RequestInit & { timeoutMs?: number };
 
 /**
@@ -129,13 +139,17 @@ export async function requestJson<S extends z.ZodType>(
  * service being down. Usage: `return mocks.serve(fixture) ?? requestJson(...)`.
  */
 export function mockSwitch(service: string, envVar: string) {
+  const mode = () => process.env[envVar];
   return {
+    /** Whether the service is mocked right now (`=true` or `=error`). */
+    active() {
+      return mode() === "true" || mode() === "error";
+    },
     serve<T>(fixture: T): Promise<T> | null {
-      const mode = process.env[envVar];
-      if (mode !== "true" && mode !== "error") return null;
+      if (!this.active()) return null;
       return (async () => {
         await connection(); // same request-time rendering as a real call
-        if (mode === "error") {
+        if (mode() === "error") {
           throw fail(new ExternalApiError(service, "unreachable", `simulated by ${envVar}=error`));
         }
         return fixture;

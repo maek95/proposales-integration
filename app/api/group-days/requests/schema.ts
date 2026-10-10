@@ -1,15 +1,10 @@
 import { z } from "zod";
+import { todayInSweden } from "@/app/_utils/formatters";
+import { MAX_QUANTITY_PER_PRODUCT } from "./limits";
 
-// What the group-days form sends. Shared by the form (types, limits) and the Server Action
-// (validation) - the server never trusts the browser's copy.
-
-/** Most of one product a single request can ask for. */
-export const MAX_QUANTITY = 144;
-
-/** Today in Sweden, as YYYY-MM-DD - the club's calendar, not the server's. */
-function todayInSweden() {
-  return new Date().toLocaleDateString("sv-SE", { timeZone: "Europe/Stockholm" });
-}
+// The contract of POST /api/group-days/requests (route.ts, next to this file): what the form
+// sends and what it gets back. Shared by the form (types) and the route (validation) -
+// the route never trusts the browser's copy.
 
 export const GroupDayRequestSchema = z.object({
   date: z.iso
@@ -22,7 +17,7 @@ export const GroupDayRequestSchema = z.object({
     .array(
       z.object({
         productId: z.string(),
-        quantity: z.number().int().min(0).max(MAX_QUANTITY),
+        quantity: z.number().int().min(0).max(MAX_QUANTITY_PER_PRODUCT),
       }),
     )
     .refine((items) => items.some((item) => item.quantity > 0), {

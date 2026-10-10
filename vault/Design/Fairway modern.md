@@ -67,7 +67,7 @@ photo is a free Unsplash stock photo, loaded through `next/image`
 (`images.unsplash.com` allowed in `next.config.ts`), until the club has its own. *Same day:* the
 club page's striped placeholders became Unsplash photos too (the lake green, the clubhouse),
 through a `Photo` component; every stock photo and its source is listed in
-`app/_lib/photos.ts`.
+`app/_content/photos.ts`.
 
 As mocked up: one page (`app/page.tsx`), anchors for navigation. The companies demo section goes.
 
@@ -110,7 +110,7 @@ The same area of the page swaps between them. Copy as in the mockup; tune it in 
 | State | What shows |
 |---|---|
 | Form | as above |
-| Field wrong | the field gets a 2px `field-error` border, `aria-invalid`, and a message under it ("Enter an email address, like name@company.se"). From the server's field errors ([[BE-3 The submit action|BE-3]]). |
+| Field wrong | the field gets a 2px `field-error` border, `aria-invalid`, and a message under it ("Enter an email address, like name@company.se"). From the server's field errors ([[BE-3 Send to Proposales through our API, code organised by what it does|BE-3]]). |
 | Golf system down (prices can't load) | the item cards are replaced by a `danger` notice "Prices aren't available right now..." and **Send is disabled** - the feature can't work without prices (`.claude/rules/external-apis.md`, critical vs nice-to-have). The rest of the page renders. |
 | Proposales down | a `danger` notice above the form, "Requests can't be sent right now...", the visitor's input kept, and Send disabled until they try again. |
 | Sending | the whole form area becomes a `panel` box: a ring spinner, "Sending your request…", "Just a few seconds. Please keep this page open." Send can't be pressed twice. |
@@ -124,7 +124,7 @@ The same area of the page swaps between them. Copy as in the mockup; tune it in 
   restyled as the `danger` notice.
 - `sections/group-days.tsx` is a Server Component: it loads the products through the golf
   system client inside `attempt()` and passes them as props to a small `"use client"` form
-  (quantities, total, the states). The send goes through [[BE-3 The submit action|BE-3]]'s Server Action - one call per
+  (quantities, total, the states). The send goes to `POST /api/group-days/requests` ([[BE-3 Send to Proposales through our API, code organised by what it does|BE-3]]) - one call per
   submit, nothing while typing.
 
 ## Left open by the mockup
@@ -141,7 +141,7 @@ Decided 9 October 2026, while building [[DES-2 The site, built from the mockup|D
   "Nothing picked yet." The mockup's 16 / 4 / 16 were there to show a full card.
 - **At most 144 of one product per request.** The mockup's stepper used the same cap. A bigger
   group calls the club.
-- **Validation happens on the server**, in one schema (`app/_lib/group-days/request.ts`): a date
+- **Validation happens on the server**, in one schema (`app/api/group-days/requests/schema.ts`): a date
   from today onwards in Swedish time, company, name, and a valid email. The browser's own
   validation is off (`noValidate`), so every error looks the same. A field's error clears as soon
   as the visitor changes that field.

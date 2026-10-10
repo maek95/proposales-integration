@@ -28,7 +28,7 @@ would have needed the same analysis again.
 
 ## Decision
 
-One shared layer in `app/_lib/external/`, with zod.
+One shared layer in `app/_clients/http.ts`, with zod.
 
 - **`ExternalApiError`** carries the service and a `kind` - `not-configured`, `unreachable`,
   `timeout`, `rejected`, `invalid-response` - plus the original `cause`. User messages and our

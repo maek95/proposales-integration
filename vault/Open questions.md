@@ -22,6 +22,47 @@ Raised 6 October 2026. The email says "Monday next week" - 2026-10-12 if it arri
 Raised 6 October 2026. The repo is `proposales-integration`, but the vault is meant for a wider
 product where Proposales is one integration. Worth deciding before the GitHub link is sent.
 
+## How do we protect the live site's Send?
+
+Raised 10 October 2026, by the user: deployed, every Send from anyone creates a draft in our
+Proposales account - the one the reviewers can see.
+
+That the drafts land in our account is the design - the site is the club's, and requests should
+reach the club's Proposales, the way a contact form reaches the club's inbox. "Sign in with
+Proposales" for visitors doesn't fit: they're the club's customers, not Proposales users, and
+the offer belongs in the club's account. (Connecting each venue's own account only makes sense
+for an app serving many clubs.) The risk is abuse and junk drafts.
+
+Options, all checks in the Send route (`app/api/group-days/requests/route.ts`) before the outbound call:
+
+- **Rate limit per visitor** (already in [[SHIP-1 Deploy on Vercel|SHIP-1]]) - stops one person
+  sending hundreds.
+- **Honeypot field** - a hidden input bots fill in; nearly free.
+- **Captcha** - e.g. Cloudflare Turnstile, free and mostly invisible; for smarter bots.
+- **Daily cap** on drafts for the whole site during the review period.
+- **Vercel password protection** on the deployment, password given to the reviewers - zero risk,
+  but hides the site from everyone else.
+
+Every draft already carries `data.source: "website"`, so the club can find and delete website
+drafts in bulk.
+
+Proposed 10 October 2026: rate limit + honeypot + daily cap before going live; Turnstile only if
+spam shows up.
+
+*Added 10 October 2026, discussing it with the user:*
+
+- **Where a counter lives.** On Vercel the routes run as serverless functions - no load balancer
+  to set up, but no single server either, so a counter in memory is lost or split between
+  instances. It needs shared storage: Vercel's firewall rate-limit rules (no code - check which
+  plan includes them), a small Redis such as Upstash with `@upstash/ratelimit`, or Proposales
+  itself - count today's website drafts with `GET /v3/proposal-search` and our `data` before
+  creating one (no new service, one extra call per Send).
+- **Who's sending, without a login.** Only the IP address, which a VPN changes at will and an
+  office shares. A per-IP limit is a speed bump for the casual case, not identity. The
+  guarantee is the **site-wide daily cap** - it bounds the damage whoever sends, from wherever.
+- **Revised proposal:** honeypot + site-wide daily cap (now [[BE-4 Daily cap on drafts|BE-4]]) counted in Proposales (no new service);
+  a per-IP limit through Vercel's firewall or Upstash on top; Turnstile if spam shows up.
+
 ## Settled
 
 - **Which look for the club's site?** Settled 9 October 2026 - B, Fairway modern. See
@@ -136,7 +177,7 @@ booking-system integrations ("live availability and pricing from D-EDGE in your 
 golf booking system is listed, so we'd fill that gap. It also closes our availability gap.
 
 In the demo, our catalogue data stands in for the club's booking system - possibly behind the
-same external-API pattern (`app/_lib/<service>/` with mocks only), so a real golf booking system
+same external-API pattern (`app/_clients/<service>/` with mocks only), so a real golf booking system
 could be swapped in by writing its client.
 
 To weigh: it makes the app more of a connector than the standalone app of
