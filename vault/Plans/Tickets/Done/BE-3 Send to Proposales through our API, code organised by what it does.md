@@ -63,7 +63,7 @@ The reasoning, and how it got here, is
 - *Which company and template* - `PROPOSALES_COMPANY_ID` and the optional
   `PROPOSALES_TEMPLATE_UUID`, read at request time by `account()` in
   `app/_clients/proposales/client.ts`; zero extra calls per Send. Set by the user: company
-  `5491`, the template "Group day at Golf Club" ([[ACC-2 Set up the club in Proposales|ACC-2]]).
+  `5491`, the template "Group day at Golf Club" ([[ACC-2 Set up the golf club in the Proposales account - company, currency, template|ACC-2]]).
 - *Every call in one place* - the [[API map]]; the unused `GET /api/proposales/companies` route
   from the groundwork was removed.
 
@@ -78,7 +78,7 @@ reorganisation. A stepper bug found on the way - two quick clicks counted as one
 
 By the user, with their own email as recipient: Proposales accepted it and created the draft,
 linked to the template. But the lines show no prices, and only the green fee shows its
-quantity - that fix is [[BE-5 Prices and quantities in the draft|BE-5]]. The contact card on the
+quantity - that fix is [[BE-5 Every line in the Proposales draft shows its price and quantity|BE-5]]. The contact card on the
 proposal is the API key's user, not the recipient: the spec's `creator_email` /
 `contact_email`, which we don't set.
 

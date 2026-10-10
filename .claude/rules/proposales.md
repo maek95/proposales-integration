@@ -26,4 +26,7 @@ Proposales. Background - what the API offers, its limits - is in
   signatures belong to real recipients. Show them only where the feature needs them; never log
   them, never put them in fixtures, never send them to an LLM without a reason the feature
   depends on.
+- **The docs MCP server** (`proposales-docs` in `.mcp.json`) is for looking things up - search it
+  before guessing a path or a shape. Its feedback tool posts to Proposales, so only with the
+  user's go-ahead.
 - To wire up a new endpoint, use the `proposales-endpoint` skill.

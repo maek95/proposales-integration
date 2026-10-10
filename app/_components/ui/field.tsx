@@ -1,4 +1,5 @@
 import type { ComponentProps } from "react";
+import fieldControl from "./field-control";
 
 /** A labelled input with its error message underneath. `name` also names the error's id. */
 export default function Field({
@@ -15,9 +16,7 @@ export default function Field({
         name={name}
         aria-invalid={error ? true : undefined}
         aria-describedby={error ? errorId : undefined}
-        className={`h-12 rounded-xl bg-white px-3.5 text-base font-normal text-ink outline-none focus-visible:ring-2 focus-visible:ring-fairway/40 ${
-          error ? "border-2 border-field-error" : "border-[1.5px] border-line focus-visible:border-fairway"
-        }`}
+        className={fieldControl(error)}
         {...input}
       />
       {error && (

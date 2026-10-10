@@ -1,4 +1,4 @@
-# ACC-2 Set up the club in Proposales
+# ACC-2 Set up the golf club in the Proposales account - company, currency, template
 
 **Status:** Todo
 **Blocked by:** nothing - but the club should be set up before the site goes live, [[SHIP-1 Deploy on Vercel|SHIP-1]].

@@ -1,7 +1,7 @@
 # SHIP-1 Deploy on Vercel
 
 **Status:** Done 10 October 2026
-**Blocked by:** [[BE-4 Daily cap on drafts|BE-4]], [[BE-5 Prices and quantities in the draft|BE-5]].
+**Blocked by:** [[BE-4 A daily cap on how many drafts the website can create in Proposales|BE-4]], [[BE-5 Every line in the Proposales draft shows its price and quantity|BE-5]].
 **Done when:** the live URL works end to end.
 
 ## What
@@ -24,7 +24,7 @@ prices.
 
 ## Outcome
 
-*Done 10 October 2026* by the user, before [[BE-4 Daily cap on drafts|BE-4]] and
-[[BE-5 Prices and quantities in the draft|BE-5]] - which this ticket listed as blocking. So the
+*Done 10 October 2026* by the user, before [[BE-4 A daily cap on how many drafts the website can create in Proposales|BE-4]] and
+[[BE-5 Every line in the Proposales draft shows its price and quantity|BE-5]] - which this ticket listed as blocking. So the
 live site creates real drafts in the account with no cap yet, and the drafts show no prices until
 BE-5. Both stay in Todo.

@@ -1,4 +1,4 @@
-# BE-5 Prices and quantities in the draft
+# BE-5 Every line in the Proposales draft shows its price and quantity
 
 **Status:** Todo
 **Blocked by:** [[BE-3 Send to Proposales through our API, code organised by what it does|BE-3]].

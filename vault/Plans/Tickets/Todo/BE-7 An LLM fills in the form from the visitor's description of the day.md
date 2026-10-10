@@ -1,7 +1,7 @@
-# BE-7 Describe your day fills in the form
+# BE-7 An LLM fills in the form from the visitor's description of the day
 
 **Status:** Todo
-**Blocked by:** [[FE-3 Headcount first|FE-3]] (the headcount goes into the prompt).
+**Blocked by:** [[FE-3 The form asks how many you are before anything else|FE-3]] (the headcount goes into the prompt).
 The bigger catalogue is done, in [[SHIP-3 Decide on an LLM, and a bigger catalogue|SHIP-3]].
 **Done when:** on the live site, a visitor sets the headcount, describes the day, presses
 "Fill in the form", and sees the steppers fill in from the whole catalogue - each one theirs to

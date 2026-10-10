@@ -1,4 +1,4 @@
-# BE-4 Daily cap on drafts
+# BE-4 A daily cap on how many drafts the website can create in Proposales
 
 **Status:** Todo
 **Blocked by:** nothing.

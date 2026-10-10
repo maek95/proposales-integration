@@ -11,9 +11,9 @@ catalogue the decision depends on.
 
 Decided 10 October 2026, by the user: **A comes back, made worth it by a real catalogue.** The
 club gets ~27 products (below, *The bigger catalogue*), the form asks for the headcount
-first as a required select ([[FE-3 Headcount first|FE-3]]), then offers an optional "describe
+first as a required select ([[FE-3 The form asks how many you are before anything else|FE-3]]), then offers an optional "describe
 your day" box that an LLM turns into quantities across the whole catalogue
-([[BE-7 Describe your day fills in the form|BE-7]]). A was ruled out earlier in this ticket
+([[BE-7 An LLM fills in the form from the visitor's description of the day|BE-7]]). A was ruled out earlier in this ticket
 because three products made it a headcount; with 27, prose like "a few beers and something
 sweet after" maps onto a dozen lines that no handful of rules gets right. The reasoning is in
 [[014 Headcount first, then describe your day]]. Everything below is the discussion that got
@@ -166,7 +166,7 @@ LLM has a place at all (*Recommendation*).
   handled like any service being busy ([[Vercel AI SDK overview]], and the open question *How do
   we pay for the LLM?*). The model is picked when building, from what the free tier offers.
 - **Capped:** a max output length on every call, and A's route counts towards the same kind of limit
-  as Send (see [[BE-4 Daily cap on drafts|BE-4]]).
+  as Send (see [[BE-4 A daily cap on how many drafts the website can create in Proposales|BE-4]]).
 - **Data:** what the visitor types goes to the LLM only because the feature needs it (A), or the
   group's picks (C) - never email or phone. Nothing logged.
 - **Mocked:** `AI_MOCK=true` returns fixed answers, so building and testing spend no credits.
@@ -299,8 +299,8 @@ Written 10 October 2026 for the next session. The user is merging branch `BE-3` 
 
 - The site is live on Vercel (deployed by the user, [[SHIP-1 Deploy on Vercel|SHIP-1]]). Send
   creates real drafts in the account - company `5491`, template "Group day at Golf Club" - with
-  no daily cap yet ([[BE-4 Daily cap on drafts|BE-4]], parked by the user) and no prices showing
-  in the draft ([[BE-5 Prices and quantities in the draft|BE-5]], next after this).
+  no daily cap yet ([[BE-4 A daily cap on how many drafts the website can create in Proposales|BE-4]], parked by the user) and no prices showing
+  in the draft ([[BE-5 Every line in the Proposales draft shows its price and quantity|BE-5]], next after this).
 - The path of a Send and the code layout are in
   [[BE-3 Send to Proposales through our API, code organised by what it does|BE-3]]: the form →
   `app/api/group-days/requests/route.ts` (validate, check our products, call out) →
