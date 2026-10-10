@@ -44,23 +44,22 @@ integrations, **FE** pages and components, **INT** real integration checks, **SH
 
 ## In progress
 
-*(nothing)*
+- [[SHIP-3 Decide on an LLM]] - the brief's bonus; options and a recommendation in the ticket.
 
 ## Todo
 
 In order - the top one is next.
 
-- [[BE-4 Daily cap on drafts]] - at most N drafts a day reach the account, whoever sends.
 - [[BE-5 Prices and quantities in the draft]] - the first real draft showed no prices.
+- [[BE-4 Daily cap on drafts]] - at most N drafts a day reach the account, whoever sends. Can wait, per the user.
 - [[ACC-1 Look at the Buyer Portal]] - the user, in the Proposales app.
 - [[ACC-2 Set up the club in Proposales]]
-- [[SHIP-1 Deploy on Vercel]]
 - [[SHIP-2 A README for reviewers]]
-- [[SHIP-3 Decide on an LLM]]
 - [[SHIP-4 Review and send]]
 
 ## Done
 
+- [[SHIP-1 Deploy on Vercel]] - 10 October 2026
 - [[BE-3 Send to Proposales through our API, code organised by what it does]] - 10 October 2026
 - [[BE-2 createProposal, with its fixture]] - 9 October 2026
 - [[DES-2 The site, built from the mockup]] - 9 October 2026
