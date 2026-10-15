@@ -35,6 +35,17 @@ description: Where code goes in app/, Server vs Client Components, styling, Type
   styled as buttons (`pill()`).
 - **Styling.** Tailwind utilities. Shared colours and fonts are tokens in `app/globals.css` -
   add one there rather than hard-coding hex values.
+- **Text is styled by what it is, never by its size.** The sizes are roles, defined once in
+  `app/globals.css`; Tailwind's own sizes (`text-sm`, `text-xl` …) are switched off there, so
+  they don't exist.
+  - Headings: a plain `<h1>`-`<h6>` (and `<legend>`) already has its size - don't add one.
+  - Other text: `<Text variant="lead | eyebrow | stat | item | caption | fine | label">`
+    (`app/_components/ui/text.tsx`), with `as` for the element. Its `className` is colour and
+    margins only.
+  - Something that isn't text - a `<label>`, a button, a nav - takes a role class
+    (`text-label`, `text-caption`, `text-body`).
+  - No sizes in brackets (`text-[19px]`), nor bracketed `leading-`/`tracking-`. A role that's
+    missing is added in `globals.css` (and as a variant) first.
 - **TypeScript.** No `any`.
 - **Keep it small.** Interview project - readable, obvious code over abstraction. No new
   dependencies without a clear reason.

@@ -6,6 +6,7 @@ import type { SuggestRequest, SuggestResult, Suggestion } from "@/app/api/group-
 import Button from "@/app/_components/ui/button";
 import ErrorNotice from "@/app/_components/ui/error-notice";
 import fieldControl from "@/app/_components/ui/field-control";
+import Text from "@/app/_components/ui/text";
 
 /** POST /api/group-days/suggest - our own API; the server talks to the model. */
 async function postSuggest(request: SuggestRequest): Promise<SuggestResult> {
@@ -60,14 +61,14 @@ export default function DescribeDay({
 
   return (
     <fieldset>
-      <legend className="mb-1.5 text-lg font-bold">
+      <legend className="mb-1.5">
         2 · Describe your day <span className="font-normal text-muted">(optional)</span>
       </legend>
       <p className="mb-3.5 text-muted">
         Tell us what you have in mind and we&apos;ll fill in the form. You check every line before
         anything is sent.
       </p>
-      <label className="flex flex-col gap-1.5 text-sm font-semibold">
+      <label className="flex flex-col gap-1.5 text-label">
         <span className="sr-only">Your day, in your own words</span>
         <textarea
           name="description"
@@ -93,9 +94,9 @@ export default function DescribeDay({
         <Button variant="primary" onClick={fill} disabled={isFilling || description.trim().length === 0}>
           {isFilling ? "Filling in…" : "Fill in the form"}
         </Button>
-        <span className="text-sm text-subtle tabular-nums">
+        <Text as="span" variant="caption" className="text-subtle tabular-nums">
           {description.length} / {MAX_DESCRIPTION_LENGTH}
-        </span>
+        </Text>
       </div>
 
       <div aria-live="polite" className="mt-3.5 empty:hidden">

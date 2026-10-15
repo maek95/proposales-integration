@@ -2,7 +2,7 @@ const variants = {
   /** The main action on a light background. */
   primary: "min-h-13 px-6.5 bg-fairway text-white hover:bg-fairway/90",
   /** The main action on the dark summary panel. */
-  mint: "min-h-13.5 w-full text-[17px] font-bold bg-mint text-ink hover:bg-mint/90 disabled:bg-subtle disabled:text-ink/70",
+  mint: "min-h-13.5 w-full text-item bg-mint text-ink hover:bg-mint/90 disabled:bg-subtle disabled:text-ink/70",
   /** The main action on a photo. */
   light: "min-h-13 px-6.5 bg-white text-ink hover:bg-white/90",
   /** A quieter dark pill, for the header. */

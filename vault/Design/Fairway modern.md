@@ -37,6 +37,13 @@ Light only for the first version - the current dark-mode block goes.
 - Lead: 19px, `muted`. Body 16px / 1.5. Legends 18px 700. Labels 14px 600.
 - Total: 40px 800, letter-spacing -0.03em, tabular numbers.
 
+*Changed 15 October 2026, from the user:* these sizes were written on each element
+(`text-[19px]`, `text-[clamp(44px,8vw,104px)]`); they're now tokens and element defaults in
+`app/globals.css` - see [[FE-6 Text is sized by what it is - headings in globals.css, everything else through a Text component|FE-6]].
+The sizes off Tailwind's scale by a pixel moved onto it: lead 19 → 20px, card titles 17 → 18px,
+nav and the summary 15 → 14px, the fine print 13 → 12px; "Request sent." 36 → 30px, the shared
+h3.
+
 **Shape:** container max 1200px, 24px side padding. Radius 12px inputs, 14px cards and notices,
 20px big panels and the photo, full pill for buttons and the stepper. Inputs 48px high; every
 tap target at least 44px.

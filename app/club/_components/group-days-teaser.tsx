@@ -2,6 +2,7 @@ import Link from "next/link";
 import pill from "@/app/_components/ui/pill";
 import Container from "@/app/_components/ui/container";
 import SectionHeading from "@/app/_components/ui/headings/section-heading";
+import Text from "@/app/_components/ui/text";
 
 export default function GroupDaysTeaser() {
   return (
@@ -10,10 +11,10 @@ export default function GroupDaysTeaser() {
         <div className="flex flex-wrap items-end justify-between gap-x-12 gap-y-6 rounded-panel bg-fairway px-10 py-14 text-white">
           <div className="max-w-[36em] flex-[1_1_360px]">
             <SectionHeading className="mb-4">Bring the whole team.</SectionHeading>
-            <p className="text-[19px] text-on-fairway-muted">
+            <Text variant="lead" className="text-on-fairway-muted">
               Company days, customer events and golf societies. Pick green fees, carts and lunch
               online, and the club emails you an offer.
-            </p>
+            </Text>
           </div>
           <Link href="/group-days" className={pill("outline")}>
             Plan a group day
