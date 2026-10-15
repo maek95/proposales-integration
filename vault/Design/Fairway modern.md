@@ -39,7 +39,7 @@ Light only for the first version - the current dark-mode block goes.
 
 *Changed 15 October 2026, from the user:* these sizes were written on each element
 (`text-[19px]`, `text-[clamp(44px,8vw,104px)]`); they're now tokens and element defaults in
-`app/globals.css` - see [[FE-6 Type sizes come from globals.css, not from each element|FE-6]].
+`app/globals.css` - see [[FE-6 Text is sized by what it is - headings in globals.css, everything else through a Text component|FE-6]].
 The sizes off Tailwind's scale by a pixel moved onto it: lead 19 → 20px, card titles 17 → 18px,
 nav and the summary 15 → 14px, the fine print 13 → 12px; "Request sent." 36 → 30px, the shared
 h3.

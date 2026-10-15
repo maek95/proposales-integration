@@ -1,4 +1,4 @@
-# FE-6 Type sizes come from globals.css, not from each element
+# FE-6 Text is sized by what it is - headings in globals.css, everything else through a Text component
 
 **Status:** In progress - built 15 October 2026, not committed yet; the user puts it on its own
 branch.
