@@ -14,7 +14,7 @@ export default function Stepper({
   onStep: (step: -1 | 1) => void;
 }) {
   const button =
-    "grid size-11 place-items-center rounded-full text-xl cursor-pointer disabled:cursor-not-allowed disabled:opacity-40 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-fairway";
+    "grid size-11 place-items-center rounded-full text-lead cursor-pointer disabled:cursor-not-allowed disabled:opacity-40 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-fairway";
   return (
     <div className="flex items-center gap-1.5 rounded-full bg-white p-1">
       <button
@@ -26,7 +26,7 @@ export default function Stepper({
       >
         −
       </button>
-      <output aria-live="polite" aria-label={label} className="min-w-9 text-center text-lg font-bold tabular-nums">
+      <output aria-live="polite" aria-label={label} className="min-w-9 text-center text-item tabular-nums">
         {value}
       </output>
       <button

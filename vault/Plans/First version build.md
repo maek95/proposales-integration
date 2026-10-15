@@ -44,6 +44,7 @@ integrations, **FE** pages and components, **INT** real integration checks, **SH
 
 ## In progress
 
+- [[FE-6 Type sizes come from globals.css, not from each element]] - headings and text sizes in one place.
 - [[FE-5 Send checks the required fields in the browser first, and jumps to the first one missing]] - no API call for a field we know is missing.
 - [[BE-8 Describe your day says what it filled in, and lists only real things it couldn't add]] - vague wishes no longer show as missing products.
 

@@ -10,7 +10,7 @@ export default function Field({
 }: ComponentProps<"input"> & { label: string; name: string; error?: string }) {
   const errorId = `${name}-error`;
   return (
-    <label className="flex flex-[1_1_300px] flex-col gap-1.5 text-sm font-semibold">
+    <label className="flex flex-[1_1_300px] flex-col gap-1.5 text-label">
       {label}
       <input
         name={name}

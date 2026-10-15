@@ -26,6 +26,49 @@
   --radius-panel: 20px;
 
   --container-page: 1200px;
+
+  /* The type scale, by role. Tailwind's own sizes (text-xs … text-9xl) are switched off, so these
+     are the only sizes there are: headings get theirs in the base layer below, other text through
+     <Text variant> (app/_components/ui/text.tsx), and an element that isn't text - a label, a
+     button, a nav - takes a role class (text-label, text-caption). A size that's missing becomes
+     a role here first. */
+  --text-*: initial;
+  --text-display: clamp(2.75rem, 8vw, 6.5rem); /* 44-104 px - the headline of a page */
+  --text-display--line-height: 0.95;
+  --text-display--letter-spacing: -0.045em;
+  --text-display--font-weight: 800;
+  --text-title: clamp(2rem, 5vw, 2.75rem); /* 32-44 px - the heading of a section */
+  --text-title--line-height: 1.05;
+  --text-title--letter-spacing: -0.03em;
+  --text-title--font-weight: 800;
+  --text-heading: 1.875rem; /* 30 px - a heading inside a section, a state of the form */
+  --text-heading--line-height: 1.1;
+  --text-heading--letter-spacing: -0.02em;
+  --text-heading--font-weight: 800;
+  --text-stat: 2.5rem; /* 40 px - a big number: the total, the course's facts */
+  --text-stat--line-height: 1.1;
+  --text-stat--letter-spacing: -0.03em;
+  --text-stat--font-weight: 800;
+  --text-lead: 1.25rem; /* 20 px - the paragraph that says what a page or section is about */
+  --text-lead--line-height: 1.4;
+  --text-body: 1rem; /* 16 px - running text, form fields */
+  --text-body--line-height: 1.5;
+  --text-item: 1.125rem; /* 18 px - the name of something in a list: a product, a step */
+  --text-item--line-height: 1.55;
+  --text-item--font-weight: 700;
+  --text-label: 0.875rem; /* 14 px - names what's next to it: a field, "Your day" */
+  --text-label--line-height: 1.45;
+  --text-label--font-weight: 600;
+  --text-caption: 0.875rem; /* 14 px - supporting text: a price, a short description */
+  --text-caption--line-height: 1.45;
+  --text-fine: 0.75rem; /* 12 px - the smallest print: terms, notes, tags */
+  --text-fine--line-height: 1.35;
+  --text-brand: 1.25rem; /* 20 px - the club's name in the header */
+  --text-brand--line-height: 1.4;
+  --text-brand--letter-spacing: -0.025em;
+  --text-brand--font-weight: 800;
+
+  --tracking-eyebrow: 0.2em; /* the small capitals above a headline */
 }
 
 @theme inline {
@@ -35,4 +78,31 @@
 body {
   background: var(--color-white);
   color: var(--color-ink);
+}
+
+/* What each element looks like by default, so a plain <h2> is already a section heading and a
+   <p> is body text - no font sizes on the element itself. */
+@layer base {
+  body {
+    @apply font-sans text-body;
+  }
+  h1 {
+    @apply text-display;
+  }
+  h2 {
+    @apply text-title;
+  }
+  h3 {
+    @apply text-heading;
+  }
+  h4,
+  legend {
+    @apply text-item;
+  }
+  h5 {
+    @apply text-body font-bold;
+  }
+  h6 {
+    @apply text-label;
+  }
 }

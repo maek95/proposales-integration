@@ -18,7 +18,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="en" className={`${hankenGrotesk.variable} h-full antialiased`}>
-      <body className="flex min-h-full flex-col font-sans text-base leading-normal">
+      <body className="flex min-h-full flex-col">
         <Header />
         {/* Positioned, so the landing photo can sit behind both the page and the footer. */}
         <div className="relative isolate flex flex-1 flex-col">

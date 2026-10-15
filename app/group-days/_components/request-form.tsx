@@ -13,6 +13,7 @@ import Field from "@/app/_components/ui/field";
 import SelectField from "@/app/_components/ui/select-field";
 import Stepper from "@/app/_components/ui/stepper";
 import DescribeDay from "./describe-day";
+import Text from "@/app/_components/ui/text";
 
 type Details = Pick<GroupDayRequest, "date" | "company" | "name" | "email">;
 
@@ -146,7 +147,7 @@ export default function RequestForm({
           <circle cx="24" cy="24" r="20" strokeWidth="4" className="stroke-line" />
           <path d="M24 4a20 20 0 0 1 20 20" strokeWidth="4" strokeLinecap="round" className="stroke-fairway" />
         </svg>
-        <h3 className="mt-5 mb-2 text-[30px] font-extrabold tracking-[-0.02em]">Sending your request…</h3>
+        <h3 className="mt-5 mb-2">Sending your request…</h3>
         <p className="text-muted">Just a few seconds. Please keep this page open.</p>
       </div>
     );
@@ -169,12 +170,14 @@ export default function RequestForm({
           />
         </svg>
         <div className="min-w-0 flex-[1_1_400px]">
-          <h3 className="mb-3 text-4xl leading-[1.1] font-extrabold tracking-[-0.03em]">Request sent.</h3>
-          <p className="mb-4.5 text-[19px]">
+          <h3 className="mb-3">Request sent.</h3>
+          <Text variant="lead" className="mb-4.5">
             The club will email you an offer shortly. You can add extras, adjust numbers and sign
             right in the offer.
-          </p>
-          <p className="mb-7 text-sm text-on-fairway-muted">{sentSummary}</p>
+          </Text>
+          <Text variant="caption" className="mb-7 text-on-fairway-muted">
+            {sentSummary}
+          </Text>
           <Button variant="outline" onClick={startOver}>
             Start a new request
           </Button>
@@ -206,7 +209,7 @@ export default function RequestForm({
         )}
 
         <fieldset>
-          <legend className="mb-3.5 text-lg font-bold">1 · Your group</legend>
+          <legend className="mb-3.5">1 · Your group</legend>
           <div className="flex max-w-sm">
             <SelectField
               label="How many are you?"
@@ -236,7 +239,7 @@ export default function RequestForm({
             )}
 
             <fieldset aria-describedby={fieldErrors.items ? "items-error" : undefined}>
-              <legend className="mb-3.5 text-lg font-bold">3 · What the day needs</legend>
+              <legend className="mb-3.5">3 · What the day needs</legend>
               {products === null ? (
                 <ErrorNotice title="Prices aren't available right now.">
                   {productsError} Group requests are paused - please try again later.
@@ -249,7 +252,7 @@ export default function RequestForm({
                 <div className="flex flex-col gap-6">
                   {categories.map((category) => (
                     <div key={category}>
-                      <h3 className="mb-2.5 text-sm font-semibold text-muted">{category}</h3>
+                      <h3 className="mb-2.5 text-label tracking-normal text-muted">{category}</h3>
                       <div className="flex flex-col gap-2.5">
                         {lines
                           .filter((line) => line.product.category === category)
@@ -259,17 +262,17 @@ export default function RequestForm({
                               className="flex flex-wrap items-center gap-x-5 gap-y-3 rounded-card bg-panel px-4.5 py-4"
                             >
                               <div className="min-w-0 flex-[1_1_200px]">
-                                <div className="text-[17px] font-bold">
+                                <Text as="div" variant="item">
                                   {product.name}
                                   {suggested.has(product.id) && (
-                                    <span className="ml-2 align-middle text-xs font-semibold text-fairway">
+                                    <Text as="span" variant="fine" className="ml-2 align-middle font-semibold text-fairway">
                                       from your description
-                                    </span>
+                                    </Text>
                                   )}
-                                </div>
-                                <div className="text-sm text-subtle">
+                                </Text>
+                                <Text as="div" variant="caption" className="text-subtle">
                                   {product.priceKr === 0 ? "Included" : `${formatKr(product.priceKr)} ${product.unit}`}
-                                </div>
+                                </Text>
                               </div>
                               <Stepper
                                 value={quantity}
@@ -292,7 +295,7 @@ export default function RequestForm({
             </fieldset>
 
             <fieldset>
-              <legend className="mb-3.5 text-lg font-bold">4 · When and who</legend>
+              <legend className="mb-3.5">4 · When and who</legend>
               <div className="flex flex-wrap gap-4">
                 <Field
                   label="Preferred date"
@@ -348,17 +351,19 @@ export default function RequestForm({
         aria-label="Your day"
         className="sticky top-6 max-h-[calc(100dvh-3rem)] min-w-0 flex-[1_1_300px] overflow-y-auto rounded-panel bg-ink p-7 text-white"
       >
-        <div className="mb-4 text-sm font-semibold text-on-dark-muted">
+        <Text as="div" variant="label" className="mb-4 text-on-dark-muted">
           Your day{headcount !== null && ` · ${formatPeople(headcount)}`}
-        </div>
+        </Text>
         {picked.length === 0 ? (
-          <p className="border-b border-on-dark-rule py-2 text-[15px] text-on-dark-muted">Nothing picked yet.</p>
+          <Text variant="caption" className="border-b border-on-dark-rule py-2 text-on-dark-muted">
+            Nothing picked yet.
+          </Text>
         ) : (
           <ul>
             {picked.map(({ product, quantity, amountKr }) => (
               <li
                 key={product.id}
-                className="flex justify-between gap-3 border-b border-on-dark-rule py-2 text-[15px]"
+                className="flex justify-between gap-3 border-b border-on-dark-rule py-2 text-caption"
               >
                 <span>
                   {quantity} × {product.name}
@@ -368,13 +373,15 @@ export default function RequestForm({
             ))}
           </ul>
         )}
-        <div className="mt-5.5 text-sm text-on-dark-muted">Indicative total</div>
-        <div aria-live="polite" className="text-[40px] font-extrabold tracking-[-0.03em] tabular-nums">
+        <Text as="div" variant="caption" className="mt-5.5 text-on-dark-muted">
+          Indicative total
+        </Text>
+        <Text as="div" variant="stat" aria-live="polite">
           {formatKr(totalKr)}
-        </div>
-        <p className="mt-1.5 mb-6 text-[13px] text-on-dark-muted">
+        </Text>
+        <Text variant="fine" className="mt-1.5 mb-6 text-on-dark-muted">
           Incl. VAT. Final price and availability are confirmed in the club&apos;s offer.
-        </p>
+        </Text>
         <Button type="submit" variant="mint" disabled={!canSend}>
           Send request
         </Button>

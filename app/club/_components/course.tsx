@@ -1,5 +1,6 @@
 import Container from "@/app/_components/ui/container";
 import SectionHeading from "@/app/_components/ui/headings/section-heading";
+import Text from "@/app/_components/ui/text";
 
 const facts = [
   { value: "18", label: "holes" },
@@ -28,10 +29,12 @@ export default function Course() {
         <dl className="grid flex-[1_1_360px] grid-cols-2 gap-2.5">
           {facts.map((fact) => (
             <div key={fact.label} className="flex flex-col-reverse rounded-card bg-panel px-5 py-5">
-              <dt className="text-sm text-subtle">{fact.label}</dt>
-              <dd className="text-[40px] leading-tight font-extrabold tracking-[-0.03em] tabular-nums">
+              <Text as="dt" variant="caption" className="text-subtle">
+                {fact.label}
+              </Text>
+              <Text as="dd" variant="stat">
                 {fact.value}
-              </dd>
+              </Text>
             </div>
           ))}
         </dl>
